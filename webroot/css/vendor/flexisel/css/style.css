@@ -1,0 +1,58 @@
+.nbs-flexisel-container {
+    position:relative;
+    max-width:100%;
+}
+
+#team-list .nbs-flexisel-container {
+    max-width:99.9%;
+}
+
+.nbs-flexisel-ul {
+    position:relative;
+    width:99999px;
+    margin:0px;
+    padding:0px;
+    list-style-type:none;	
+    text-align:center;
+    white-space:nowrap;
+    overflow:auto;
+}
+
+.nbs-flexisel-inner {
+    overflow:hidden;
+    margin: 0 auto;
+    width:90%;
+}
+
+
+#team .nbs-flexisel-inner {
+    overflow:hidden;
+    margin: 0 auto;
+    padding: 5px;
+    width:84%;
+}
+
+#team-list .nbs-flexisel-item {
+    width: auto !important;
+    padding: 4px;
+}
+
+
+.nbs-flexisel-item {
+    float:left;
+    margin:0px;
+    padding:4px;
+    cursor:pointer;
+    position:relative;
+    line-height:0px;
+    text-align: left;
+}
+.nbs-flexisel-item img:not(.img-responsive) {
+	width: 100%;
+	cursor: pointer;
+	position: relative;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	max-width:133px;
+	max-height:84px;
+}

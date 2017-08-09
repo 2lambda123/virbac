@@ -90,33 +90,13 @@ $cakeDescription = 'Virbac';
                         </a>
                     </li>
                     <li>
-                        <a href="users/">
+                        <a href="jobs-orders/">
                             <i class="fa fa-users"></i> <span><?php echo __('Ordenes de Trabajo'); ?></span>
                         </a>
                     </li>
                     <li>
-                        <a href="news/">
+                        <a href="standars-lists/">
                             <i class="fa fa-file-text"></i> <span><?php echo __('Listas'); ?></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<resources/">
-                            <i class="fa fa-comments-o"></i> <span><?php echo __('Esqueleto Listas'); ?></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="testimonials/">
-                            <i class="fa fa-briefcase"></i> <span><?php echo __('Pasos'); ?></span>
-                        </a>
-                    </li>                    
-                    <li>
-                        <a href="testimonials/">
-                            <i class="fa fa-briefcase"></i> <span><?php echo __('Esqueleto Pasos'); ?></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="clients/">
-                            <i class="fa fa-male"></i> <span><?php echo __('Clientes'); ?></span>
                         </a>
                     </li>
                 </ul>
@@ -130,33 +110,7 @@ $cakeDescription = 'Virbac';
         </div>
     </div>
     <script type="text/javascript">
-    /*
-        $(function(){
-            //Enable sidebar toggle
-            $("[data-toggle='offcanvas']").click(function(e) {
-                e.preventDefault();
 
-                //If window is small enough, enable sidebar push menu
-                if ($(window).width() <= 992) {
-                    $('.row-offcanvas').toggleClass('active');
-                    $('.left-side').removeClass("collapse-left");
-                    $(".right-side").removeClass("strech");
-                    $('.row-offcanvas').toggleClass("relative");
-                } else {
-                    //Else, enable content streching
-                    $('.left-side').toggleClass("collapse-left");
-                    $(".right-side").toggleClass("strech");
-                }
-            });
-
-            //Add hover support for touch devices
-            $('.btn').bind('touchstart', function() {
-                $(this).addClass('hover');
-            }).bind('touchend', function() {
-                $(this).removeClass('hover');
-            });
-        });
-        */
     </script>
 <body>
 

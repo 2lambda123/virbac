@@ -50,19 +50,12 @@
                     <a href="jobs-orders/edit/<?php echo  $jobsOrder->id; ?>" class="action-btn" title="Editar">
                         <i class="fa fa-fw fa-pencil"></i>
                     </a>
-                    
-                    <form method="POST" action="jobs-orders/delete">
-                        <a class="action-btn" href="#" onclick="confirmElimination()" title="Eliminar" >
-                            <i class="fa fa-fw fa-trash"></i>                           
-                        </a>
+                    <form name="post_<?php echo $jobsOrder->id;?>" style="display:none;" method="post" action="/virbac/jobs-orders/delete/<?php echo $jobsOrder->id;?>">
+                        <input type="hidden" name="_method" value="POST">
                     </form>
-                                        
-                    <!--<form method="POST" action="jobs-orders/delete">
-                    </form>-->
-                    <!--
-                    <a class="action-btn" href="#" onclick="confirmElimination(<?php echo ""; ?>)" title="Eliminar" >
-                        <i class="fa fa-fw fa-trash"></i>                           
-                    </a>-->
+                    <a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # <?php echo $jobsOrder->id;?>?&quot;)) { document.post_<?php echo $jobsOrder->id;?>.submit(); } event.returnValue = false; return false;" class="action-btn" title="Eliminar">
+                        <i class="fa fa-fw fa-trash"></i>
+                    </a>      
                 </td>
             </tr>
             <?php endforeach; ?>

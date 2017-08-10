@@ -85,17 +85,17 @@ $cakeDescription = 'Virbac';
             <section class="sidebar">
                 <ul class="sidebar-menu">
                     <li class="active">
-                        <a href="dashboard/">
+                        <a href="<?php echo $this->request->webroot . 'jobs-orders';?>">
                             <i class="fa fa-home"></i> <span>Inicio</span>
                         </a>
                     </li>
                     <li>
-                        <a href="jobs-orders/">
+                        <a href="<?php echo $this->request->webroot . 'jobs-orders';?>">
                             <i class="fa fa-users"></i> <span><?php echo __('Ordenes de Trabajo'); ?></span>
                         </a>
                     </li>
                     <li>
-                        <a href="standars-lists/">
+                        <a href="<?php echo $this->request->webroot . 'standars-lists';?>">
                             <i class="fa fa-file-text"></i> <span><?php echo __('Listas'); ?></span>
                         </a>
                     </li>

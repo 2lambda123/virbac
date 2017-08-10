@@ -55,7 +55,8 @@ class StepsController extends AppController
     {
         $step = $this->Steps->newEntity();
         if ($this->request->is('post')) {
-            $step = $this->Steps->patchEntity($step, $this->request->getData());
+            $data = json_decode($this->request->getData());
+            $step = $this->Steps->patchEntity($step, $data);
             if ($this->Steps->save($step)) {
                 $this->Flash->success(__('The step has been saved.'));
 

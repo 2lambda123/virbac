@@ -1,25 +1,31 @@
-<?php
-/**
-  * @var \App\View\AppView $this
-  * @var \App\Model\Entity\StandarsList[]|\Cake\Collection\CollectionInterface $standarsLists
-  */
-?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Standars List'), ['action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="standarsLists index large-9 medium-8 columns content">
-    <h3><?= __('Standars Lists') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
+<aside class="right-side">
+    <section class="content-header">
+        <h1>
+            <?php echo __('Lista'); ?>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a><i class="fa fa-home"></i> <?php echo __('Inicio'); ?></a></li>
+            <li class="active"><?php echo __('Lista'); ?></li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <?php echo $this->Session->flash(); ?>
+        <div class="actions-ribbon">
+            <a class="btn btn-app" href="standars-lists/add">
+                <i class="fa fa-plus"></i>
+                <?php echo __('Lista'); ?>
+            </a>
+        </div>
+        <div class="courses index">
+            <table class="table table-condensed table-hover">
+            <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('description') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('presentation') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('name', 'Nombre') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('description', 'Descripción') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('presentation', 'Presentación') ?></th>
+                <th scope="col" class="actions"><?= __('Acciones') ?></th>
             </tr>
         </thead>
         <tbody>
@@ -30,9 +36,18 @@
                 <td><?= h($standarsList->description) ?></td>
                 <td><?= h($standarsList->presentation) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $standarsList->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $standarsList->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $standarsList->id], ['confirm' => __('Are you sure you want to delete # {0}?', $standarsList->id)]) ?>
+                    <a href="standars-lists/view/<?php echo  $standarsList->id; ?>" class="action-btn" title="Ver">
+                        <i class="fa fa-fw fa-list-alt"></i>
+                    </a>                    
+                    <a href="standars-lists/edit/<?php echo  $standarsList->id ?>" class="action-btn" title="Editar">
+                        <i class="fa fa-fw fa-pencil"></i>
+                    </a>
+                    <form name="post_<?php echo $standarsList->id;?>" style="display:none;" method="post" action="/virbac/standars-lists/delete/<?php echo $standarsList->id;?>">
+                        <input type="hidden" name="_method" value="POST">
+                    </form>
+                    <a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # <?php echo $jobsOrder->id;?>?&quot;)) { document.post_<?php echo $jobsOrder->id;?>.submit(); } event.returnValue = false; return false;" class="action-btn" title="Eliminar">
+                        <i class="fa fa-fw fa-trash-o"></i>
+                    </a>     
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -48,4 +63,5 @@
         </ul>
         <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
     </div>
-</div>
+    </section>
+</aside>

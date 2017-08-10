@@ -5,14 +5,14 @@
         </h1>
         <ol class="breadcrumb">
             <li><a><i class="fa fa-home"></i> <?php echo __('Inicio'); ?></a></li>
-            <li class="active"><?php echo __('Cursos'); ?></li>
+            <li class="active"><?php echo __('Ordenes de Trabajo'); ?></li>
         </ol>
     </section>
 
     <section class="content">
         <?php echo $this->Session->flash(); ?>
         <div class="actions-ribbon">
-            <a class="btn btn-app" href="">
+            <a class="btn btn-app" href="jobs-orders/add">
                 <i class="fa fa-plus"></i>
                 <?php echo __('Orden de trabajo'); ?>
             </a>
@@ -21,15 +21,15 @@
             <table class="table table-condensed table-hover">
             <thead>
                 <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('standar_list_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('id', 'Id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('standar_list_id', 'Lista') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('sku') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('description') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('presentation') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('job_number') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('pieces') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('comment') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('description', 'Descripción') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('presentation', 'Presentación') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('job_number', 'Número de orden') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('pieces', 'Cantidad') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('comment', 'Comentatios') ?></th>
+                <th scope="col" class="actions"><?= __('Acciones') ?></th>
             </tr>
         </thead>
         <tbody>
@@ -54,7 +54,7 @@
                         <input type="hidden" name="_method" value="POST">
                     </form>
                     <a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # <?php echo $jobsOrder->id;?>?&quot;)) { document.post_<?php echo $jobsOrder->id;?>.submit(); } event.returnValue = false; return false;" class="action-btn" title="Eliminar">
-                        <i class="fa fa-fw fa-trash"></i>
+                        <i class="fa fa-fw fa-trash-o"></i>
                     </a>      
                 </td>
             </tr>

@@ -55,8 +55,10 @@ class StandarsStepsController extends AppController
     {
         $standarsStep = $this->StandarsSteps->newEntity();
         if ($this->request->is('post')) {
-            $standarsStep = $this->StandarsSteps->patchEntity($standarsStep, $this->request->getData());
-            if ($this->StandarsSteps->save($standarsStep)) {
+            $data = json_decode($this->request->getData());
+            
+            $standarsStep = $this->StandarsSteps->patchEntity($standarsStep, $data);
+            if ($this->StandarsSteps->saveAll($standarsStep)) {
                 $this->Flash->success(__('The standars step has been saved.'));
 
                 return $this->redirect(['action' => 'index']);

@@ -51,23 +51,36 @@ class StandarsStepsController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($stepsData = null)
     {
         $standarsStep = $this->StandarsSteps->newEntity();
-        if ($this->request->is('post')) {
-            $data = json_decode($this->request->getData());
-            
-            $standarsStep = $this->StandarsSteps->patchEntity($standarsStep, $data);
-            if ($this->StandarsSteps->saveAll($standarsStep)) {
-                $this->Flash->success(__('The standars step has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+        if (isset($stepsData)) {
+            $standarsStep = $this->StandarsSteps->patchEntity($standarsStep, $stepsData);
+            $this->log($standarsStep);
+            if ($this->StandarsSteps->saveMany($standarsStep)) {
+                //$this->Flash->success(__('The standars step has been saved.'));
+                $this->log('entro');
+                return;
             }
-            $this->Flash->error(__('The standars step could not be saved. Please, try again.'));
+            //$this->Flash->error(__('The standars step could not be saved. Please, try again.'));
         }
+
+        /*
         $standarsLists = $this->StandarsSteps->StandarsLists->find('list', ['limit' => 200]);
         $this->set(compact('standarsStep', 'standarsLists'));
         $this->set('_serialize', ['standarsStep']);
+        */
+    }
+
+    public function addSteps($stepsData = null)
+    {
+        if (isset($stepsData)) {
+            $standarsStep = $this->StandarsSteps->newEntities($stepsData);
+            if ($this->StandarsSteps->saveMany($standarsStep)) {
+                return;
+            }
+            //$this->Flash->error(__('The standars step could not be saved. Please, try again.'));
+        }
     }
 
     /**

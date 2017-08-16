@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Controller\StandarsStepsController;
 
 /**
  * StandarsLists Controller
@@ -52,14 +53,26 @@ class StandarsListsController extends AppController
     {
         $standarsList = $this->StandarsLists->newEntity();
         if ($this->request->is('post')) {
-            $standarsList = $this->StandarsLists->patchEntity($standarsList, $this->request->getData());
-            if ($this->StandarsLists->save($standarsList)) {
-                $this->Flash->success(__('The standars list has been saved.'));
+            $getData = $this->request->getData();
+            $standarsList = $this->StandarsLists->patchEntity($standarsList, $getData);
+            $savedData = $this->StandarsLists->save($standarsList);
+            if ($savedData) {
+                $steps = [];
+                foreach ($getData['standars-steps'] as $step) {
+                    $values = [
+                        'standar_list_id' => $savedData['id'],
+                        'name' => $step
+                        ];
+                    array_push($steps, $values);
+                }
+                $stepsController = new StandarsStepsController();
+                $stepsController->addSteps($steps);
 
+                $this->Flash->success(__('The standars list has been saved.'));
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The standars list could not be saved. Please, try again.'));
-        }
+        } 
         $this->set(compact('standarsList'));
         $this->set('_serialize', ['standarsList']);
     }
@@ -72,10 +85,12 @@ class StandarsListsController extends AppController
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
-    {
+    {   
+        /*
         $standarsList = $this->StandarsLists->get($id, [
             'contain' => []
         ]);
+        */
         if ($this->request->is(['patch', 'post', 'put'])) {
             $standarsList = $this->StandarsLists->patchEntity($standarsList, $this->request->getData());
             if ($this->StandarsLists->save($standarsList)) {
@@ -85,8 +100,11 @@ class StandarsListsController extends AppController
             }
             $this->Flash->error(__('The standars list could not be saved. Please, try again.'));
         }
-        $this->set(compact('standarsList'));
-        $this->set('_serialize', ['standarsList']);
+
+        $this->loadModel('StandarsSteps');
+        $standarsSteps = $this->StandarsSteps->findAllByStandar_list_id($id);
+        $this->set(compact('standarsList', 'standarsSteps'));
+        $this->set('_serialize', ['standarsList', 'standarsSteps']);
     }
 
     /**

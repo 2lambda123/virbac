@@ -13,8 +13,8 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = 'Virbac';
-?>
+ $cakeDescription = 'Virbac';
+ ?>
 <!DOCTYPE html>
 <html>
 <head>

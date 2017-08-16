@@ -19,7 +19,6 @@
                     <?= $this->Form->create($standarsList) ?>
                         <div class="box-body" id="list">
                             <fieldset>
-                                <input type="hidden" value="<?php echo mt_rand(); ?>" id="listId" name="id">
                                 <div class="form-group">
                                     <label for="Name" class="required">Nombre de la Lista</label>
                                     <input type="text" id="Name" name="name" class="form-control input-sm">
@@ -82,47 +81,13 @@
         var newStep = '<tr id="' + rowId + '">\
                         <td>' + $('#StepName').val() + '</td>\
                         <td>' + deleteButton + '</td>\
+                        <input type="hidden" name="standars-steps[]" value="' + $('#StepName').val() + '">\
                       </tr>';
         $('#step-body').append(newStep);
     });   
-
-    $('form').submit(function(event){
-        var stepsJson = stepsToJson();
-        addSteps(stepsJson, event);
-    });
 
     function deleteSteps(self){
         var rowId = $(self).val();
         $('#' + rowId).remove();
     }
-
-    function stepsToJson(){
-        var json = [];
-        var standar_list_id = $('#listId').val();
-
-        $('#step-body tr').each(function() {
-            json.push({
-                'standar_list_id' : standar_list_id,
-                'name' : $(this).find("td").html()
-            });
-        });
-        return json;
-    }
-
-    function addSteps(json, event){
-        $.ajax({
-            url: '/standars-steps/add',
-            data: json,
-            method: 'POST',
-            dataType: 'json',
-            success: function (result) {
-            },
-            error: function (result) {
-                event.preventDefault();
-                alert('Ha ocurrido un error por favor intenta de nuevo.');
-            }
-        });
-    }
-
-
 </script>

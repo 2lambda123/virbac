@@ -10,7 +10,7 @@
     </section>
 
     <section class="content">
-        <?php echo $this->Session->flash(); ?>
+        <?php $this->Flash->render(); ?>
         <div class="actions-ribbon">
             <a class="btn btn-app" href="jobs-orders/add">
                 <i class="fa fa-plus"></i>

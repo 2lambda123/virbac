@@ -10,7 +10,7 @@
     </section>
 
     <section class="content">
-        <?php echo $this->Session->flash(); ?>
+        <?php $this->Flash->render(); ?>
         <div class="actions-ribbon">
             <a class="btn btn-app" href="standars-lists/add">
                 <i class="fa fa-plus"></i>
@@ -45,7 +45,7 @@
                     <form name="post_<?php echo $standarsList->id;?>" style="display:none;" method="post" action="/virbac/standars-lists/delete/<?php echo $standarsList->id;?>">
                         <input type="hidden" name="_method" value="POST">
                     </form>
-                    <a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # <?php echo $jobsOrder->id;?>?&quot;)) { document.post_<?php echo $jobsOrder->id;?>.submit(); } event.returnValue = false; return false;" class="action-btn" title="Eliminar">
+                    <a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # <?php echo $standarsList->id;?>?&quot;)) { document.post_<?php echo $standarsList->id;?>.submit(); } event.returnValue = false; return false;" class="action-btn" title="Eliminar">
                         <i class="fa fa-fw fa-trash-o"></i>
                     </a>     
                 </td>

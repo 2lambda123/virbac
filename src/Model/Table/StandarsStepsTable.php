@@ -35,11 +35,12 @@ class StandarsStepsTable extends Table
         $this->setTable('standars_steps');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
-
+        /*
         $this->belongsTo('StandarsLists', [
             'foreignKey' => 'standar_list_id',
             'joinType' => 'INNER'
         ]);
+        */
     }
 
     /**
@@ -55,6 +56,10 @@ class StandarsStepsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
+            ->requirePresence('standar_list_id', 'create')
+            ->notEmpty('standar_list_id');
+
+        $validator
             ->requirePresence('name', 'create')
             ->notEmpty('name');
 
@@ -68,10 +73,11 @@ class StandarsStepsTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
+    /*
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['standar_list_id'], 'StandarsLists'));
 
         return $rules;
-    }
+    }*/
 }

@@ -55,12 +55,11 @@ class StepsController extends AppController
     {
         $step = $this->Steps->newEntity();
         if ($this->request->is('post')) {
-            $data = json_decode($this->request->getData());
-            $step = $this->Steps->patchEntity($step, $data);
+            $step = $this->Steps->patchEntity($step, $this->request->getData());
             if ($this->Steps->save($step)) {
                 $this->Flash->success(__('The step has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'standars-list', 'action' => 'index']);
             }
             $this->Flash->error(__('The step could not be saved. Please, try again.'));
         }

@@ -40,8 +40,10 @@ class StandarsListsController extends AppController
             'contain' => []
         ]);
 
-        $this->set('standarsList', $standarsList);
-        $this->set('_serialize', ['standarsList']);
+        $this->loadModel('StandarsSteps');
+        $standarsSteps = $this->StandarsSteps->findAllByStandar_list_id($id);
+        $this->set(compact('standarsList', 'standarsSteps'));
+        $this->set('_serialize', ['standarsList', 'standarsSteps']);
     }
 
     /**
@@ -53,20 +55,16 @@ class StandarsListsController extends AppController
     {
         $standarsList = $this->StandarsLists->newEntity();
         if ($this->request->is('post')) {
-            $getData = $this->request->getData();
-            $standarsList = $this->StandarsLists->patchEntity($standarsList, $getData);
-            $savedData = $this->StandarsLists->save($standarsList);
-            if ($savedData) {
+            $standarsList = $this->StandarsLists->patchEntity($standarsList, $this->request->getData());
+            if ($this->StandarsLists->save($standarsList)) {
+
                 $steps = [];
-                foreach ($getData['standars-steps'] as $step) {
-                    $values = [
-                        'standar_list_id' => $savedData['id'],
-                        'name' => $step
-                        ];
+                foreach ($standarsList['standars-steps'] as $step) {
+                    $values = [ 'standar_list_id' => $standarsList->id, 'name' => $step ];
                     array_push($steps, $values);
                 }
-                $stepsController = new StandarsStepsController();
-                $stepsController->addSteps($steps);
+
+                (new StandarsStepsController())->addSteps($steps);
 
                 $this->Flash->success(__('The standars list has been saved.'));
                 return $this->redirect(['action' => 'index']);
@@ -86,20 +84,28 @@ class StandarsListsController extends AppController
      */
     public function edit($id = null)
     {   
-        /*
         $standarsList = $this->StandarsLists->get($id, [
             'contain' => []
         ]);
-        */
         if ($this->request->is(['patch', 'post', 'put'])) {
             $standarsList = $this->StandarsLists->patchEntity($standarsList, $this->request->getData());
             if ($this->StandarsLists->save($standarsList)) {
-                $this->Flash->success(__('The standars list has been saved.'));
 
+                $steps = [];
+                foreach ($standarsList['standars-steps'] as $step) {
+                    $values = [ 'standar_list_id' => $standarsList->id, 'name' => $step ];
+                    array_push($steps, $values);
+                }
+
+                $stepController = new StandarsStepsController();
+                $stepController->delete($standarsList->id);
+                $stepController->addSteps($steps);
+
+                $this->Flash->success(__('The standars list has been saved.'));
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The standars list could not be saved. Please, try again.'));
-        }
+        } 
 
         $this->loadModel('StandarsSteps');
         $standarsSteps = $this->StandarsSteps->findAllByStandar_list_id($id);
@@ -119,6 +125,8 @@ class StandarsListsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $standarsList = $this->StandarsLists->get($id);
         if ($this->StandarsLists->delete($standarsList)) {
+            $stepController = new StandarsStepsController();
+            $stepController->delete($id);
             $this->Flash->success(__('The standars list has been deleted.'));
         } else {
             $this->Flash->error(__('The standars list could not be deleted. Please, try again.'));

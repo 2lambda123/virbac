@@ -118,14 +118,11 @@ class StandarsStepsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $standarsStep = $this->StandarsSteps->get($id);
-        if ($this->StandarsSteps->delete($standarsStep)) {
-            $this->Flash->success(__('The standars step has been deleted.'));
+        if ($this->StandarsSteps->deleteAll(['standar_list_id' => $id])) {
+            //$this->Flash->success(__('The standars step has been deleted.'));
         } else {
-            $this->Flash->error(__('The standars step could not be deleted. Please, try again.'));
+            //$this->Flash->error(__('The standars step could not be deleted. Please, try again.'));
         }
-
-        return $this->redirect(['action' => 'index']);
+        return;
     }
 }

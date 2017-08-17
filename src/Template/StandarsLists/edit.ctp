@@ -16,7 +16,6 @@
                     <div class="box-header">
                         <h3 class="box-title"><?php echo __('Lista'); ?></h3>
                     </div>
-                    <?php $this->log($standarsSteps); ?>
                     <?= $this->Form->create($standarsList) ?>
                         <div class="box-body" id="list">
                             <fieldset>
@@ -54,8 +53,18 @@
                                                 <th>Borrar</th>
                                             </thead>
                                             <tbody id="step-body">
+                                                <?php $i = 0; ?>
                                                 <?php foreach ($standarsSteps as $value): ?>
-                                                    
+                                                    <tr id="<?php echo $i; ?>">
+                                                        <td><?php echo $value['name'];?></td>
+                                                        <td>
+                                                            <button type="button" class="delete-step" onclick="deleteSteps(this)" title="Eliminar" value="<?php echo $i; ?>">
+                                                                <i class="fa fa-fw fa-trash-o"></i>
+                                                            </button>
+                                                        </td>
+                                                        <input type="hidden" name="standars-steps[name]" value="<?php echo $value['name'];?>">
+                                                    </tr>
+                                                    <?php $i++; ?>
                                                 <?php endforeach ?>
                                             </tbody>
                                         </table>

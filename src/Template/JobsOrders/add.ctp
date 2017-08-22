@@ -11,17 +11,21 @@
     </section>
     <section class="content">
         <div class="row">
-            <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">                
+            <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
                 <div class="box box-warning">
                     <div class="box-header">
                         <h3 class="box-title"><?php echo __('Agregar Orden de Trabajo'); ?></h3>
-                    </div>                    
+                    </div>
                     <?= $this->Form->create($jobsOrder) ?>
                         <div class="box-body">
                             <fieldset>
                                 <div class="form-group">
                                     <label for="StandarList" class="required">Lista Estándar</label>
-                                    <input type="text" id="StandarList" name="standar_list_id" class="form-control input-sm">
+                                    <select id="StandarList" name="standar_list_id" class="form-control input-sm">
+                                        <?php foreach ($standarsList as $key => $value): ?>
+                                            <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                                        <?php endforeach ?>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="Sku" class="required">SKU</label>
@@ -37,23 +41,23 @@
                                 <div class="form-group">
                                     <label for="JobNumber">Número de orden</label>
                                     <input type="text" id="JobNumber" maxlength="128" name="job_number" class="form-control input-sm">
-                                </div>                                
+                                </div>
                                 <div class="form-group">
                                     <label for="Pieces">Cantidad</label>
                                     <input type="text" id="Pieces" maxlength="128" name="pieces" class="form-control input-sm">
-                                </div>                                
+                                </div>
                                 <div class="form-group">
                                     <label for="Commentary">Comentario</label>
                                     <input type="text" id="Commentary" maxlength="128" name="comment" class="form-control input-sm">
                                 </div>
                             </fieldset>
-                        </div> 
+                        </div>
                         <div class="box-footer">
                             <div class="text-right">
                                 <input type="submit" value="Aceptar" class="btn btn-info">
                             </div>
                         </div>
-                    <?= $this->Form->end() ?>                                       
+                    <?= $this->Form->end() ?>
                 </div>
             </div>
         </div>

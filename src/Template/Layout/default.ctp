@@ -34,17 +34,55 @@
 
     <?= $this->Html->script('jquery-3.2.1.min.js') ?>
     <?= $this->Html->script('bootstrap.min.js') ?>
+    <?= $this->Html->script('validation.js') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
 <body class="skin-blue">
-    <!--
+    <header class="header">
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="navbar-btn sidebar-toggle hidden-lg" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <div class="navbar-right">
+                <ul class="nav navbar-nav">
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="glyphicon glyphicon-user"></i>
+                            <span><?php /*echo $this->Session->read('Auth.User.global_id'); */?><i class="caret"></i></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header bg-light-blue">
+
+                            </li>
+                            <!-- Menu Body -->
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="<?php /*echo $this->webroot; */?>users/profile" class="btn btn-default btn-flat">Perfil</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="<?php /*echo $this->webroot; */?>users/logout" class="btn btn-default btn-flat">Salir</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="separator"></div>
+    </header>
     <div class="wrapper row-offcanvas row-offcanvas-left">
-    </div>
-    -->
-        <aside class="left-side sidebar-offcanvas" style="margin-top: -80px">
+        <aside class="left-side sidebar-offcanvas">
             <section class="sidebar">
                 <ul class="sidebar-menu">
                     <li class="active">
@@ -68,9 +106,20 @@
         
         <?php echo $this->fetch('content'); ?>
         
+        <div id="sql-dump" class="right-side">
+            <?php //echo $this->element('sql_dump'); ?>
+        </div>
+    </div>
     <script type="text/javascript">
 
     </script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.3.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
+
+
+</body>
+</html>
+
 <body>
 
 </body>

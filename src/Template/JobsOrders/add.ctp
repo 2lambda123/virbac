@@ -21,7 +21,11 @@
                             <fieldset>
                                 <div class="form-group">
                                     <label for="StandarList" class="required">Lista Estándar</label>
-                                    <input type="number" id="StandarList" name="standar_list_id" class="form-control input-sm">
+                                    <select id="StandarList" name="standar_list_id" class="form-control input-sm">                                         
+                                        <?php foreach ($standarsList as $key => $value): ?>
+                                            <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                                        <?php endforeach ?>                                
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="Sku" class="required">SKU</label>
@@ -59,3 +63,5 @@
         </div>
     </section>
 </aside>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>      
+<?= $this->Html->script('validation.js') ?>

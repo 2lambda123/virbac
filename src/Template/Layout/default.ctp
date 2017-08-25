@@ -48,7 +48,7 @@
             <section class="sidebar">
                 <ul class="sidebar-menu">
                     <li class="active">
-                        <a href="<?php echo $this->request->webroot . 'jobs-orders';?>">
+                        <a href="<?php echo $this->request->webroot . 'jobs-orders/inicio';?>">
                             <i class="fa fa-home"></i> <span>Inicio</span>
                         </a>
                     </li>

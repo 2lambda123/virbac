@@ -25,11 +25,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="Description" class="required">Descripción</label>
-                                    <input type="text" id="Description" name="description" class="form-control input-sm">
+                                    <input type="text" id="Description" name="listDescripción" class="form-control input-sm">
                                 </div>
                                 <div class="form-group">
                                     <label for="Presentation" class="required">Presentación</label>
-                                    <input type="text" id="Presentation" maxlength="128" name="presentation" class="form-control input-sm">
+                                    <input type="text" id="Presentation" maxlength="128" name="listPresentación" class="form-control input-sm">
                                 </div>
                                 <div class="row">
                                     <div class="col-md-8">
@@ -91,3 +91,5 @@
         $('#' + rowId).remove();
     }
 </script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>      
+<?= $this->Html->script('validation_list.js') ?>

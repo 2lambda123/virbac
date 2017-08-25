@@ -113,4 +113,15 @@ class JobsOrdersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function Inicio()
+    {
+        $this->paginate = [
+            'contain' => ['StandarsLists']
+        ];
+        $jobsOrders = $this->paginate($this->JobsOrders);
+
+        $this->set(compact('jobsOrders'));
+        $this->set('_serialize', ['jobsOrders']);
+    }
 }

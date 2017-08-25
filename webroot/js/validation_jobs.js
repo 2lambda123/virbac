@@ -30,15 +30,8 @@ $(function(){
 			comment: {
 			                 required: true,
 			                 maxlength: 200
-			},
-			listname: {
-			                 required: true,
-			                 maxlength: 100
-			},
-			stepname: {
-			                 required: true,
-			                 maxlength: 100
 			}
+
 						
 		},
           
@@ -61,10 +54,7 @@ $(function(){
 			                 required: 'Este campo es requerido',
 			                 maxlength: 'Por favor no ingreses mas de 200 caracteres'
 			},
-			presentation: {
-			                 required: 'Este campo es requerido',
-			                 maxlength: 'Por favor no ingreses mas de 200 caracteres'
-			},
+
 			job_number: {
 			                 required: 'Este campo es requerido',
 			                 maxlength: 'Por favor no ingreses mas de 50 caracteres'

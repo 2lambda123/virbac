@@ -3679,3 +3679,12 @@ Profile
     max-height: 310px;
     overflow-y: auto;
 }
+.select {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  font-size: 16px;
+  color: $select-color;
+  width: $select-width;
+  height: $select-height;
+}

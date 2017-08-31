@@ -124,4 +124,28 @@ class JobsOrdersController extends AppController
         $this->set(compact('jobsOrders'));
         $this->set('_serialize', ['jobsOrders']);
     }
+
+    public function filterByDate()
+    {
+
+        $this->autoRender = false;
+        $data = $this->request->getData();
+        return  $this->JobsOrders->find('all', ['year' => $data['year'], 'week' =>$data['week']]);
+
+
+
+
+        /*
+         $jobsOrders = $this->JobsOrders->find('all', ['year' => $data['year'], 'week' =>$data['week']]);
+        $info = [];
+        foreach($jobsOrders  as $jobsOrder){
+            array_push($info, $jobsOrder);
+        }
+        */
+        
+    }
+
+
+
+
 }

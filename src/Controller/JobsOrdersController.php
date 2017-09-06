@@ -56,6 +56,7 @@ class JobsOrdersController extends AppController
         $jobsOrder = $this->JobsOrders->newEntity();
         if ($this->request->is('post')) {
             $jobsOrder = $this->JobsOrders->patchEntity($jobsOrder, $this->request->getData());
+            $jobsOrder['creation_date'] =  new \DateTime(date("Y-m-d"));
             if ($this->JobsOrders->save($jobsOrder)) {
                 $this->Flash->success(__('The jobs order has been saved.'));
 
@@ -114,8 +115,19 @@ class JobsOrdersController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function Inicio()
+    public function inicio()
     {
+        if ($this->request->is(['patch', 'post', 'put'])){
+            $this->autoRender = false;
+            $date =  new \DateTime(date($this->request->getData('date')));
+            $jobsOrders = $this->JobsOrders->find()->where([
+                'WEEK(creation_date)' => $date->format('W')
+                ])->toArray();
+
+            $this->response->header(['Content-type: application/json']);
+            $this->response->body(json_encode($jobsOrders));
+            return $this->response;
+        }
         $this->paginate = [
             'contain' => ['StandarsLists']
         ];
@@ -124,28 +136,4 @@ class JobsOrdersController extends AppController
         $this->set(compact('jobsOrders'));
         $this->set('_serialize', ['jobsOrders']);
     }
-
-    public function filterByDate()
-    {
-
-        $this->autoRender = false;
-        $data = $this->request->getData();
-        return  $this->JobsOrders->find('all', ['year' => $data['year'], 'week' =>$data['week']]);
-
-
-
-
-        /*
-         $jobsOrders = $this->JobsOrders->find('all', ['year' => $data['year'], 'week' =>$data['week']]);
-        $info = [];
-        foreach($jobsOrders  as $jobsOrder){
-            array_push($info, $jobsOrder);
-        }
-        */
-        
-    }
-
-
-
-
 }

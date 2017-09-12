@@ -21,8 +21,8 @@
                             <fieldset>
                                 <div class="form-group">
                                     <label for="StandarList" class="required">Lista Estándar</label>
-                                    <select id="StandarList" name="standar_list_id" class="form-control input-sm">
-                                        <?php foreach ($standarsList as $key => $value): ?>
+                                    <select id="StandarList" name="standar_list_id" class="form-control input-sm">                                         
+                                        <?php foreach ($standarsLists as $key => $value): ?>
                                             <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
                                         <?php endforeach ?>                                
                                     </select>

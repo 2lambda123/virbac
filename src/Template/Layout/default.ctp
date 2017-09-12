@@ -67,6 +67,11 @@
                             <i class="fa fa-file-text"></i> <span><?php echo __('Listas'); ?></span>
                         </a>
                     </li>
+                    <li>
+                        <a href="<?php echo $this->request->webroot . 'standars-lists';?>">
+                            <i class="fa fa-file-text"></i> <span><?php echo __('Progreso'); ?></span>
+                        </a>
+                    </li>
                 </ul>
             </section>
         </aside>

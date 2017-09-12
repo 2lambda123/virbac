@@ -21,21 +21,21 @@
                             <fieldset>
                                 <div class="form-group">
                                     <label for="Name" class="required">Nombre de la Lista</label>
-                                    <input type="text" id="Name" name="listname" class="form-control input-sm">
+                                    <input type="text" id="Name" name="name" class="form-control input-sm">
                                 </div>
                                 <div class="form-group">
                                     <label for="Description" class="required">Descripción</label>
-                                    <input type="text" id="Description" name="listDescripción" class="form-control input-sm">
+                                    <input type="text" id="Description" name="description" class="form-control input-sm">
                                 </div>
                                 <div class="form-group">
                                     <label for="Presentation" class="required">Presentación</label>
-                                    <input type="text" id="Presentation" maxlength="128" name="listPresentación" class="form-control input-sm">
+                                    <input type="text" id="Presentation" maxlength="128" name="presentation" class="form-control input-sm">
                                 </div>
                                 <div class="row">
                                     <div class="col-md-8">
                                         <div class="form-group">
                                             <label for="StepName" class="required">Nuevo Paso</label>
-                                            <input type="text" id="StepName" maxlength="128" name="stepname" class="form-control input-sm">
+                                            <input type="text" id="StepName" maxlength="128" class="form-control input-sm">
                                         </div>
                                     </div>
                                     <div class="col-md-4" style="margin-top: 22px">

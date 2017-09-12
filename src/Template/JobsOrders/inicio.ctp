@@ -20,8 +20,8 @@
           ?>
         </h2>
           <div class="form-group">
-              <label class="col-xs-3 control-label">Date</label>
-              <div class="col-xs-5 date">
+              <label class="col-xs-2 col-xs-offset-3 control-label" style="margin-right: -70px; margin-top: 6px">Fecha:</label>
+              <div class="col-xs-3 date">
                   <div class="input-group input-append date" id="datePicker">
                     <input type="text" class="form-control" name="date" id="dateValue" />
                     <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
@@ -33,7 +33,7 @@
     <br/>
     <div id="jobs-rows">
       <?php foreach ($jobsOrders as $jobsOrder): ?>
-        <a href="#"><div id="pricing" class="">
+        <a href="view/<?php echo $jobsOrder->id;?>"><div id="pricing" class="">
           <div class="slideanim">
             <div class="col-md-4 col-xs-12">
               <div class="panel panel-default text-center">
@@ -89,7 +89,7 @@
     var htmlJob = "";
 
     for (var i = 0; i < json.length; i++){
-      htmlJob += '<a href="#"><div id="pricing" class=""> \
+      htmlJob += '<a href="view/' + json[i]['id']+ '"><div id="pricing" class=""> \
           <div class="slideanim"> \
             <div class="col-md-4 col-xs-12"> \
               <div class="panel panel-default text-center"> \

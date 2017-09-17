@@ -61,7 +61,7 @@
             <?= $this->Paginator->next(__('Siguiente') . ' >') ?>
             <?= $this->Paginator->last(__('Ultimo') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Pagina {{page}} de {{pages}}, Se muestra {{current}} fila(s) de {{count}} en total')]) ?></p>
+        <p><?= $this->Paginator->counter(['format' => __('Página {{page}} de {{pages}}, Se muestra {{current}} fila(s) de {{count}} en total')]) ?></p>
     </div>
     </section>
 </aside>

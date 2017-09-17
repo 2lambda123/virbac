@@ -12,7 +12,7 @@
     <section class="content">
         <?php $this->Flash->render(); ?>
         <div class="actions-ribbon">
-            <a class="btn btn-app" href="jobs-orders/add">
+            <a class="btn btn-app" href="jobs-orders/add" style="font-size: medium;">
                 <i class="fa fa-plus"></i>
                 <?php echo __('Orden de trabajo'); ?>
             </a>
@@ -69,7 +69,7 @@
             <?= $this->Paginator->next(__('Siguiente') . ' >') ?>
             <?= $this->Paginator->last(__('Ultimo') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Pagina {{page}} de {{pages}}, Se muestra {{current}} fila(s) de {{count}} en total')]) ?></p>
+        <p><?= $this->Paginator->counter(['format' => __('Página {{page}} de {{pages}}, Se muestra {{current}} fila(s) de {{count}} en total')]) ?></p>
     </div>
     </section>
 </aside>

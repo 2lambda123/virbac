@@ -43,7 +43,7 @@ body > .header {
 .right-side,
 .left-side {
   min-height: 100%;
-  display: block;
+  display: block; 
 }
 /*right side - contins main content*/
 .right-side {
@@ -52,7 +52,7 @@ body > .header {
 }
 /*left side - contains sidebar*/
 .left-side {
-  position: absolute;
+  position: fixed;
   width: 220px;
   top: 0;
 }
@@ -101,15 +101,11 @@ body.fixed .wrapper {
 }
 /* Content */
 .content {
-  padding: 20px 15px;
+  padding: 2% 3% 30em 3% ;
   background: #f9f9f9;
   overflow: auto;
-  position: fixed;
-  padding-right: 250px;
-  width: 100%;
-  height: 100%;
-  padding-bottom: 130px;
 }
+
 /* Utility */
 /* H1 - H6 font */
 h1,
@@ -318,6 +314,12 @@ img {
 .table.no-border td,
 .table.no-border th {
   border: 0;
+}
+
+
+.table th{
+font-size: large;
+
 }
 /* .text-center in tables */
 table.text-center,

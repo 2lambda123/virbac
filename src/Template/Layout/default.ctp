@@ -49,7 +49,7 @@
     <div class="wrapper row-offcanvas row-offcanvas-left">
     </div>
     -->
-        <aside class="left-side sidebar-offcanvas" style="margin-top: -80px">
+        <aside class="left-side sidebar-offcanvas" style="margin-top: -80px;">
             <section class="sidebar">
                 <ul class="sidebar-menu">
                     <li class="active">

@@ -33,10 +33,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="Description" class="required">Descripción</label>
-                                    <input type="text" id="Description" maxlength="128" name="description" class="form-control input-sm">
+                                    <input type="text" id="Description" maxlength="128" name="description" class="form-control input-sm" disabled >
                                 </div><div class="form-group">
                                     <label for="Presentation" class="required">Presentación</label>
-                                    <input type="text" id="Presentation" maxlength="128" name="presentation" class="form-control input-sm">
+                                    <input type="text" id="Presentation" maxlength="128" name="presentation" class="form-control input-sm" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label for="JobNumber">Número de orden</label>
@@ -45,6 +45,10 @@
                                 <div class="form-group">
                                     <label for="Pieces">Cantidad</label>
                                     <input type="number" id="Pieces" maxlength="128" name="pieces" class="form-control input-sm">
+                                </div> 
+                                <div class="form-group">
+                                    <label for="Creation_date">Fecha de fabricacion</label>
+                                    <input type="date" id="Creation_date" maxlength="128" name="creation_date" class="form-control input-sm">
                                 </div>                                
                                 <div class="form-group">
                                     <label for="Commentary">Comentario</label>
@@ -65,3 +69,38 @@
 </aside>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>      
 <?= $this->Html->script('validation_jobs.js') ?>
+<script type="text/javascript">
+
+  $("#Sku").on('change', function(e) {
+    var sku = $("#Sku").val(); 
+
+    if (sku.trim(' ')) {
+        filterBySku(sku);
+    } else {
+       $("#Description").val('');
+       $("#Presentation").val('');
+    }
+  });
+
+    function filterBySku(sku){
+        $.ajax({
+          url: 'getSku',
+          data: { sku: sku },
+          type: 'post',
+            success: function (result) {
+              if(result==''){
+                alert('El Sku que ingresaste no existe')
+              }
+              
+              $("#Description").val(result[0]['description']);
+              $("#Presentation").val(result[0]['presentation']);
+            },
+            error: function (result) {
+              console.log(result);
+              alert('Ha ocurrido un error, por favor intenta de nuevo.')
+            }
+        });
+  }
+
+
+</script>

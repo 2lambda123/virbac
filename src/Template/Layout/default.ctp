@@ -72,6 +72,11 @@
                             <i class="fa fa-file-text"></i> <span><?php echo __('Progreso'); ?></span>
                         </a>
                     </li>
+                    <li>
+                        <a href="<?php echo $this->request->webroot . 'products';?>">
+                            <i class="fa fa-file-text"></i> <span><?php echo __('Productos'); ?></span>
+                        </a>
+                    </li>
                 </ul>
             </section>
         </aside>

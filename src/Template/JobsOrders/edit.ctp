@@ -33,10 +33,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="Description" class="required">Descripción</label>
-                                    <input type="text" value="<?php echo $jobsOrder['description']; ?>"" id="Description" maxlength="128" name="description" class="form-control input-sm">
+                                    <input type="text" value="<?php echo $jobsOrder['description']; ?>"" id="Description" maxlength="128" name="description" class="form-control input-sm" disabled>
                                 </div><div class="form-group">
                                     <label for="Presentation" class="required">Presentación</label>
-                                    <input type="text" value="<?php echo $jobsOrder['presentation']; ?>"" id="Presentation" maxlength="128" name="presentation" class="form-control input-sm">
+                                    <input type="text" value="<?php echo $jobsOrder['presentation']; ?>"" id="Presentation" maxlength="128" name="presentation" class="form-control input-sm" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label for="JobNumber">Número de orden</label>
@@ -45,6 +45,10 @@
                                 <div class="form-group">
                                     <label for="Pieces">Cantidad</label>
                                     <input type="text" value="<?php echo $jobsOrder['pieces']; ?>"" id="Pieces" maxlength="128" name="pieces" class="form-control input-sm">
+                                </div>
+                                <div class="form-group">
+                                    <label for="creation_date">Fecha de creación</label>
+                                    <input type="date" value="<?php echo $jobsOrder['creation_date']; ?>"" id="Creation_date" maxlength="128" name="creation_date" class="form-control input-sm">
                                 </div>                                
                                 <div class="form-group">
                                     <label for="Commentary">Comentario</label>
@@ -65,3 +69,40 @@
 </aside>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>      
 <?= $this->Html->script('validation_jobs.js') ?>
+
+<script type="text/javascript">
+    var route = '<?php echo $this->request->webroot; ?>';
+
+    $("#Sku").on('change', function(e) {
+    var sku = $("#Sku").val(); 
+
+    if (sku.trim(' ')) {
+        filterBySku(sku);
+    } else {
+       $("#Description").val('');
+       $("#Presentation").val('');
+    }
+    });
+
+    function filterBySku(sku){
+        $.ajax({
+          url: route + 'jobs-orders/getSku',
+          data: { sku: sku },
+          type: 'post',
+            success: function (result) {
+              if(result==''){
+                alert('El Sku que ingresaste no existe')
+              }
+              
+              $("#Description").val(result[0]['description']);
+              $("#Presentation").val(result[0]['presentation']);
+            },
+            error: function (result) {
+              console.log(result);
+              alert('Ha ocurrido un error, por favor intenta de nuevo.')
+            }
+        });
+  }
+
+
+</script>

@@ -41,10 +41,14 @@
                                 <div class="form-group">
                                     <label for="Pieces">Cantidad</label>
                                     <input type="text" disabled value="<?php echo $jobsOrder['pieces']; ?>"" id="Pieces" maxlength="128" name="pieces" class="form-control input-sm">
+                                </div>
+                                 <div class="form-group">
+                                    <label for="creation_date">Fecha de fabricación</label>
+                                    <input type="date" disabled value="<?php echo $jobsOrder['creation_date']; ?>"" id="Creation_date" maxlength="128" name="creation_date" class="form-control input-sm">
                                 </div>                                
                                 <div class="form-group">
                                     <label for="Commentary">Comentario</label>
-                                    <input type="text" disabled value="<?php echo $jobsOrder['commentary']; ?>"" id="Commentary" maxlength="128" name="comment" class="form-control input-sm">
+                                    <input type="text" disabled value="<?php echo $jobsOrder['comment']; ?>"" id="Comment" maxlength="128" name="comment" class="form-control input-sm">
                                 </div>
                             </fieldset>
                         </div> 

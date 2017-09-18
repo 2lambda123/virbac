@@ -28,7 +28,8 @@
                 <th scope="col"><?= $this->Paginator->sort('presentation', 'Presentación') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('job_number', 'Número de orden') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('pieces', 'Cantidad') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('comment', 'Comentatios') ?></th>
+                 <th scope="col"><?= $this->Paginator->sort('creation_date', 'Fecha de fabricación') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('comment', 'Comentarios') ?></th>
                 <th scope="col" class="actions"><?= __('Acciones') ?></th>
             </tr>
         </thead>
@@ -42,6 +43,7 @@
                 <td><?= h($jobsOrder->presentation) ?></td>
                 <td><?= h($jobsOrder->job_number) ?></td>
                 <td><?= $this->Number->format($jobsOrder->pieces) ?></td>
+                <td><?= h($jobsOrder->creation_date) ?></td>
                 <td><?= h($jobsOrder->comment) ?></td>
                 <td class="actions">
                     <a href="jobs-orders/view/<?php echo  $jobsOrder->id; ?>" class="action-btn" title="Ver">

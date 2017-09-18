@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Model\Product;
 
 /**
  * JobsOrders Controller
@@ -135,5 +136,23 @@ class JobsOrdersController extends AppController
 
         $this->set(compact('jobsOrders'));
         $this->set('_serialize', ['jobsOrders']);
+    }
+
+     public function getSku()
+    {
+        if ($this->request->is(['patch', 'post', 'put'])){
+            $this->autoRender = false;
+            $sku = $this->request->getData('sku');
+            $this->log($this->request->getData('sku'));
+            $this->loadModel('Products');
+            $jobsOrders = $this->Products->find()->where([
+                'sku' => $sku
+                ])->toArray();
+            $this->log($jobsOrders);
+            $this->response->header(['Content-type: application/json']);
+            $this->response->body(json_encode($jobsOrders));
+            return $this->response;
+        }
+       
     }
 }

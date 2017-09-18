@@ -116,11 +116,12 @@ class JobsOrdersController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function inicio()
+    public function home()
     {
         if ($this->request->is(['patch', 'post', 'put'])){
             $this->autoRender = false;
             $date =  new \DateTime(date($this->request->getData('date')));
+            $this->log($date->format('W'));
             $jobsOrders = $this->JobsOrders->find()->where([
                 'WEEK(creation_date)' => $date->format('W')
                 ])->toArray();
@@ -129,11 +130,16 @@ class JobsOrdersController extends AppController
             $this->response->body(json_encode($jobsOrders));
             return $this->response;
         }
+        $date =  new \DateTime(date("Y-m-d"));
+        $this->log($date->format('W'));
+        $query = $this->JobsOrders->find()->where([
+            'WEEK(creation_date)' => $date->format('W')
+            ]);        
+
         $this->paginate = [
             'contain' => ['StandarsLists']
         ];
-        $jobsOrders = $this->paginate($this->JobsOrders);
-
+        $jobsOrders = $this->paginate($query);
         $this->set(compact('jobsOrders'));
         $this->set('_serialize', ['jobsOrders']);
     }

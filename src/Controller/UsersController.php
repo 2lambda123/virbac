@@ -6,6 +6,7 @@ use App\Controller\AppController;
 /**
  * Users Controller
  *
+ * @property \App\Model\Table\UsersTable $Users
  *
  * @method \App\Model\Entity\User[] paginate($object = null, array $settings = [])
  */
@@ -19,10 +20,10 @@ class UsersController extends AppController
      */
     public function index()
     {
-        $users = $this->paginate($this->Users);
+        $user = $this->paginate($this->Users);
 
-        $this->set(compact('users'));
-        $this->set('_serialize', ['users']);
+        $this->set(compact('user'));
+        $this->set('_serialize', ['user']);
     }
 
     /**
@@ -35,7 +36,7 @@ class UsersController extends AppController
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => []
+            'contain' => ['Steps']
         ]);
 
         $this->set('user', $user);

@@ -58,7 +58,7 @@
 </aside>
 <script type="text/javascript">
   $('#datePicker').datepicker({
-    format: 'yyyy-mm-dd'
+    format: 'dd-mm-yyyy'
   })
   .on('hide', function(e) {
     var date = $("#dateValue").val();
@@ -68,7 +68,7 @@
 
   function filterByDate(date){
     $.ajax({
-      url: 'inicio',
+      url: 'jobs-orders/home',
       data: { date: date },
       type: 'post',
         success: function (result) {

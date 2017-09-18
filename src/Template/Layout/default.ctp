@@ -68,13 +68,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo $this->request->webroot . 'standars-lists';?>">
-                            <i class="fa fa-file-text"></i> <span><?php echo __('Progreso'); ?></span>
+                        <a href="<?php echo $this->request->webroot . 'products';?>">
+                            <i class="fa fa-file-text"></i> <span><?php echo __('Productos'); ?></span>
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo $this->request->webroot . 'products';?>">
-                            <i class="fa fa-file-text"></i> <span><?php echo __('Productos'); ?></span>
+                        <a href="<?php echo $this->request->webroot . 'users';?>">
+                            <i class="fa fa-user"></i> <span><?php echo __('Usuarios'); ?></span>
                         </a>
                     </li>
                 </ul>

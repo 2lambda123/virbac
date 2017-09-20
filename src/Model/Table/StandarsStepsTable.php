@@ -43,41 +43,4 @@ class StandarsStepsTable extends Table
         */
     }
 
-    /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
-    public function validationDefault(Validator $validator)
-    {
-        $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
-
-        $validator
-            ->requirePresence('standar_list_id', 'create')
-            ->notEmpty('standar_list_id');
-
-        $validator
-            ->requirePresence('name', 'create')
-            ->notEmpty('name');
-
-        return $validator;
-    }
-
-    /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
-     */
-    /*
-    public function buildRules(RulesChecker $rules)
-    {
-        $rules->add($rules->existsIn(['standar_list_id'], 'StandarsLists'));
-
-        return $rules;
-    }*/
 }

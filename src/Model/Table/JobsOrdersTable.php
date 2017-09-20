@@ -43,46 +43,6 @@ class JobsOrdersTable extends Table
     }
 
     /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
-    public function validationDefault(Validator $validator)
-    {
-        $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
-
-        $validator
-            ->requirePresence('sku', 'create')
-            ->notEmpty('sku');
-
-        $validator
-            ->requirePresence('description', 'create')
-            ->notEmpty('description');
-
-        $validator
-            ->requirePresence('presentation', 'create')
-            ->notEmpty('presentation');
-
-        $validator
-            ->requirePresence('job_number', 'create')
-            ->notEmpty('job_number');
-
-        $validator
-            ->integer('pieces')
-            ->requirePresence('pieces', 'create')
-            ->notEmpty('pieces');
-
-        $validator
-            ->requirePresence('comment', 'create')
-            ->notEmpty('comment');
-
-        return $validator;
-    }
-
-    /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
      *

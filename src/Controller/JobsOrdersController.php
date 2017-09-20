@@ -121,7 +121,6 @@ class JobsOrdersController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])){
             $this->autoRender = false;
             $date =  new \DateTime(date($this->request->getData('date')));
-            $this->log($date->format('W'));
             $jobsOrders = $this->JobsOrders->find()->where([
                 'WEEK(creation_date)' => $date->format('W')
                 ])->toArray();
@@ -131,7 +130,6 @@ class JobsOrdersController extends AppController
             return $this->response;
         }
         $date =  new \DateTime(date("Y-m-d"));
-        $this->log($date->format('W'));
         $query = $this->JobsOrders->find()->where([
             'WEEK(creation_date)' => $date->format('W')
             ]);        
@@ -149,12 +147,10 @@ class JobsOrdersController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])){
             $this->autoRender = false;
             $sku = $this->request->getData('sku');
-            $this->log($this->request->getData('sku'));
             $this->loadModel('Products');
             $jobsOrders = $this->Products->find()->where([
                 'sku' => $sku
                 ])->toArray();
-            $this->log($jobsOrders);
             $this->response->header(['Content-type: application/json']);
             $this->response->body(json_encode($jobsOrders));
             return $this->response;

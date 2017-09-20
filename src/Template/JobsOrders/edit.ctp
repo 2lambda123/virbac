@@ -48,7 +48,7 @@
                                 </div>                              
                                 <div class="form-group">
                                     <label for="Commentary">Comentario</label>
-                                    <input type="text" value="<?php echo $jobsOrder['commentary']; ?>"" id="Commentary" maxlength="128" name="comment" class="form-control input-sm">
+                                    <input type="text" value="<?php echo $jobsOrder['comment']; ?>"" id="Commentary" maxlength="128" name="comment" class="form-control input-sm">
                                 </div>
 
                                  <div class="form-group">

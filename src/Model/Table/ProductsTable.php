@@ -35,26 +35,4 @@ class ProductsTable extends Table
         $this->setPrimaryKey('sku');
     }
 
-    /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
-    public function validationDefault(Validator $validator)
-    {
-        $validator
-            ->integer('sku')
-            ->allowEmpty('sku', 'create');
-
-        $validator
-            ->requirePresence('description', 'create')
-            ->notEmpty('description');
-
-        $validator
-            ->requirePresence('presentation', 'create')
-            ->notEmpty('presentation');
-
-        return $validator;
-    }
 }

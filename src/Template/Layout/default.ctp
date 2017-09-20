@@ -31,12 +31,11 @@
     <?= $this->Html->css('ionicons.min') ?>
     <?= $this->Html->css('main.css') ?>
     <?= $this->Html->css('bootstrap.min.css') ?>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
+    <?= $this->Html->css('datepicker.min.css') ?>
 
     <?= $this->Html->script('jquery-3.2.1.min.js') ?>
     <?= $this->Html->script('bootstrap.min.js') ?>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
+    <?= $this->Html->script('datepicker.min.js') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -53,7 +52,7 @@
             <section class="sidebar">
                 <ul class="sidebar-menu">
                     <li class="active">
-                        <a href="<?php echo $this->request->webroot;?>">
+                        <a href="<?php echo $this->request->webroot; ?>">
                             <i class="fa fa-home"></i> <span>Inicio</span>
                         </a>
                     </li>
@@ -80,12 +79,7 @@
                 </ul>
             </section>
         </aside>
-        
+    <body>
         <?php echo $this->fetch('content'); ?>
-        
-    <script type="text/javascript">
-    </script>
-<body>
-
-</body>
+    </body>
 </html>

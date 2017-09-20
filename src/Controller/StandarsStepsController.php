@@ -56,10 +56,8 @@ class StandarsStepsController extends AppController
         $standarsStep = $this->StandarsSteps->newEntity();
         if (isset($stepsData)) {
             $standarsStep = $this->StandarsSteps->patchEntity($standarsStep, $stepsData);
-            $this->log($standarsStep);
             if ($this->StandarsSteps->saveMany($standarsStep)) {
                 //$this->Flash->success(__('The standars step has been saved.'));
-                $this->log('entro');
                 return;
             }
             //$this->Flash->error(__('The standars step could not be saved. Please, try again.'));

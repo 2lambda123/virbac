@@ -40,39 +40,4 @@ class UsersTable extends Table
             'foreignKey' => 'user_id'
         ]);
     }
-
-    /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
-    public function validationDefault(Validator $validator)
-    {
-        $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
-
-        $validator
-            ->requirePresence('name', 'create')
-            ->notEmpty('name');
-
-        $validator
-            ->requirePresence('paternal_last_name', 'create')
-            ->notEmpty('paternal_last_name');
-
-        $validator
-            ->requirePresence('maternal_last_name', 'create')
-            ->notEmpty('maternal_last_name');
-
-        $validator
-            ->requirePresence('access_level', 'create')
-            ->notEmpty('access_level');
-
-        $validator
-            ->requirePresence('password', 'create')
-            ->notEmpty('password');
-
-        return $validator;
-    }
 }

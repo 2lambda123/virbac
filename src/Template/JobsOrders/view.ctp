@@ -48,7 +48,7 @@
                                 </div>                                
                                 <div class="form-group">
                                     <label for="Commentary">Comentario</label>
-                                    <input type="text" disabled value="<?php echo $jobsOrder['comment']; ?>"" id="Comment" maxlength="128" name="comment" class="form-control input-sm">
+                                    <input type="text" disabled value="<?php echo $jobsOrder['comment']; ?>"" id="C omment" maxlength="128" name="comment" class="form-control input-sm">
                                 </div>
                             </fieldset>
                         </div> 

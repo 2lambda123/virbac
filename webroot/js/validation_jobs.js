@@ -16,10 +16,9 @@ $(function(){
 			pieces: {
 				required: true,
 				maxlength: 11
-			},
-			comment: {
-				required: true,
-				maxlength: 200
+			},		
+			creation_date: {
+				required: true
 			}
 		},
           
@@ -39,10 +38,9 @@ $(function(){
 			pieces: {
 				required: 'Este campo es requerido',
 				maxlength: 'Por favor no ingreses mas de 11 caracteres'
-			},
-			comment: {
-				required: 'Este campo es requerido',
-				maxlength: 'Por favor no ingreses mas de 200 caracteres'
+			},			
+			creation_date: {
+				required: 'Este campo es requerido'
 			}
 		} 
 	});

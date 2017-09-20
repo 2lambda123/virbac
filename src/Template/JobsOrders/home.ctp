@@ -23,7 +23,7 @@
               <label class="col-xs-2 col-xs-offset-3 control-label" style="margin-right: -70px; margin-top: 6px">Fecha:</label>
               <div class="col-xs-3 date">
                   <div class="input-group input-append date" id="datePicker">
-                    <input type="text" class="form-control" name="date" id="dateValue" value="<?php echo date('Y-m-d'); ?>" />
+                    <input type="text" class="form-control" name="date" id="dateValue" value="<?php echo date('d-m-Y'); ?>" />
                     <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                   </div>
               </div>

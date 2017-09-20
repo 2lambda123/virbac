@@ -47,20 +47,16 @@
                                     <input type="text" value="<?php echo $jobsOrder['pieces']; ?>"" id="Pieces" maxlength="128" name="pieces" class="form-control input-sm">
                                 </div>                              
                                 <div class="form-group">
+                                    <label for="Date">Fecha:</label>
+                                    <div class="input-group input-append date" id="datePicker">
+                                        <input type="text" class="form-control" name="creation_date" id="Date" value="<?php echo date('d-m-Y'); ?>" />
+                                        <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="Commentary">Comentario</label>
                                     <input type="text" value="<?php echo $jobsOrder['comment']; ?>"" id="Commentary" maxlength="128" name="comment" class="form-control input-sm">
                                 </div>
-
-                                 <div class="form-group">
-                                    <label class="col-xs-2 col-xs-offset-3 control-label" style="margin-right: -70px; margin-top: 6px">Fecha:</label>
-                                    <div class="col-xs-3 date">
-                                    <div class="input-group input-append date" id="datePicker">
-                                    <input type="text" class="form-control" name="creation_date" id="Creation_date" value="<?php echo date('Y-m-d'); ?>" />
-                                    <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                                </div>
-                             </div>
-                         </div>
-                     </div>
                             </fieldset>
                         </div> 
                         <div class="box-footer">
@@ -68,7 +64,7 @@
                                 <input type="submit" value="Aceptar" class="btn btn-info">
                             </div>
                         </div>
-                    <?= $this->Form->end() ?>                                       
+                    <?= $this->Form->end() ?>                                     
                 </div>
             </div>
         </div>
@@ -79,9 +75,9 @@
 
 <script type="text/javascript">
 
-  $('#datePicker').datepicker({
-    format: 'dd-mm-yyyy'
-  })
+    $('#datePicker').datepicker({
+        format: 'dd-mm-yyyy'
+    })
 
     var route = '<?php echo $this->request->webroot; ?>';
 

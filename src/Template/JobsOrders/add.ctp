@@ -46,10 +46,13 @@
                                     <label for="Pieces">Cantidad</label>
                                     <input type="number" id="Pieces" maxlength="128" name="pieces" class="form-control input-sm">
                                 </div> 
-                                <div class="form-group">
-                                    <label for="Creation_date">Fecha de fabricacion</label>
-                                    <input type="date" id="Creation_date" maxlength="128" name="creation_date" class="form-control input-sm">
-                                </div>                                
+                                 <div class="form-group">
+                                    <label for="Date">Fecha:</label>
+                                    <div class="input-group input-append date" id="datePicker">
+                                        <input type="text" class="form-control" name="creation_date" id="Date" value="<?php echo date('d-m-Y'); ?>" />
+                                        <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                </div>                              
                                 <div class="form-group">
                                     <label for="Commentary">Comentario</label>
                                     <input type="text" id="Commentary" maxlength="128" name="comment" class="form-control input-sm">
@@ -70,7 +73,10 @@
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>      
 <?= $this->Html->script('validation_jobs.js') ?>
 <script type="text/javascript">
-
+    $('#datePicker').datepicker({
+        format: 'dd-mm-yyyy'
+    })
+    
   $("#Sku").on('change', function(e) {
     var sku = $("#Sku").val(); 
 

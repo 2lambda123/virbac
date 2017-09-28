@@ -57,7 +57,6 @@ class JobsOrdersController extends AppController
         $jobsOrder = $this->JobsOrders->newEntity();
         if ($this->request->is('post')) {
             $jobsOrder = $this->JobsOrders->patchEntity($jobsOrder, $this->request->getData());
-            $jobsOrder['creation_date'] =  new \DateTime(date("Y-m-d"));
             if ($this->JobsOrders->save($jobsOrder)) {
                 $this->Flash->success(__('The jobs order has been saved.'));
 

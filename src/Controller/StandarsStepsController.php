@@ -62,18 +62,13 @@ class StandarsStepsController extends AppController
             }
             //$this->Flash->error(__('The standars step could not be saved. Please, try again.'));
         }
-
-        /*
-        $standarsLists = $this->StandarsSteps->StandarsLists->find('list', ['limit' => 200]);
-        $this->set(compact('standarsStep', 'standarsLists'));
-        $this->set('_serialize', ['standarsStep']);
-        */
     }
 
     public function addSteps($stepsData = null)
     {
         if (isset($stepsData)) {
             $standarsStep = $this->StandarsSteps->newEntities($stepsData);
+            $this->log($standarsStep);
             if ($this->StandarsSteps->saveMany($standarsStep)) {
                 return;
             }
@@ -116,9 +111,14 @@ class StandarsStepsController extends AppController
      */
     public function delete($id = null)
     {
+        $this->log($id);
         if ($this->StandarsSteps->deleteAll(['standar_list_id' => $id])) {
+                    $this->log('ex');
+
             //$this->Flash->success(__('The standars step has been deleted.'));
         } else {
+                    $this->log('fail');
+
             //$this->Flash->error(__('The standars step could not be deleted. Please, try again.'));
         }
         return;

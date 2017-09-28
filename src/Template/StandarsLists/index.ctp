@@ -23,8 +23,6 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name', 'Nombre') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('description', 'Descripción') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('presentation', 'Presentación') ?></th>
                 <th scope="col" class="actions"><?= __('Acciones') ?></th>
             </tr>
         </thead>
@@ -33,8 +31,6 @@
             <tr>
                 <td><?= $this->Number->format($standarsList->id) ?></td>
                 <td><?= h($standarsList->name) ?></td>
-                <td><?= h($standarsList->description) ?></td>
-                <td><?= h($standarsList->presentation) ?></td>
                 <td class="actions">
                     <a href="standars-lists/view/<?php echo  $standarsList->id; ?>" class="action-btn" title="Ver">
                         <i class="fa fa-fw fa-list-alt"></i>

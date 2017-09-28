@@ -2,8 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-use App\Controller\StandarsStepsController;
-
+use App\Model\StandarsStep;
+use Cake\Datasource\ConnectionManager;
 /**
  * StandarsLists Controller
  *
@@ -39,9 +39,12 @@ class StandarsListsController extends AppController
         $standarsList = $this->StandarsLists->get($id, [
             'contain' => []
         ]);
-
         $this->loadModel('StandarsSteps');
-        $standarsSteps = $this->StandarsSteps->findAllByStandar_list_id($id);
+        $standarsSteps = $this->StandarsSteps->find()
+                                            ->select(['id', 'name', 'substep_id'])
+                                            ->where(['standar_list_id' => $id])
+                                            ->order(['id' => 'DESC', 'substep_id' => 'ASC']);
+
         $this->set(compact('standarsList', 'standarsSteps'));
         $this->set('_serialize', ['standarsList', 'standarsSteps']);
     }
@@ -57,14 +60,10 @@ class StandarsListsController extends AppController
         if ($this->request->is('post')) {
             $standarsList = $this->StandarsLists->patchEntity($standarsList, $this->request->getData());
             if ($this->StandarsLists->save($standarsList)) {
-
-                $steps = [];
-                foreach ($standarsList['standars-steps'] as $step) {
-                    $values = [ 'standar_list_id' => $standarsList->id, 'name' => $step ];
-                    array_push($steps, $values);
+                foreach ($standarsList['data'] as $key => $step) {
+                    $standarsList['data'][$key]['standar_list_id'] = $standarsList->id;
                 }
-
-                (new StandarsStepsController())->addSteps($steps);
+                (new StandarsStepsController())->addSteps($standarsList['data']);
 
                 $this->Flash->success(__('The standars list has been saved.'));
                 return $this->redirect(['action' => 'index']);
@@ -90,16 +89,13 @@ class StandarsListsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $standarsList = $this->StandarsLists->patchEntity($standarsList, $this->request->getData());
             if ($this->StandarsLists->save($standarsList)) {
-
-                $steps = [];
-                foreach ($standarsList['standars-steps'] as $step) {
-                    $values = [ 'standar_list_id' => $standarsList->id, 'name' => $step ];
-                    array_push($steps, $values);
+                foreach ($standarsList['data'] as $key => $step) {
+                    $standarsList['data'][$key]['standar_list_id'] = $standarsList->id;
                 }
 
                 $stepController = new StandarsStepsController();
                 $stepController->delete($standarsList->id);
-                $stepController->addSteps($steps);
+                $stepController->addSteps($standarsList['data']);
 
                 $this->Flash->success(__('The standars list has been saved.'));
                 return $this->redirect(['action' => 'index']);
@@ -108,7 +104,11 @@ class StandarsListsController extends AppController
         } 
 
         $this->loadModel('StandarsSteps');
-        $standarsSteps = $this->StandarsSteps->findAllByStandar_list_id($id);
+        $standarsSteps = $this->StandarsSteps->find()
+                                            ->select(['id', 'name', 'substep_id'])
+                                            ->where(['standar_list_id' => $id])
+                                            ->order(['id' => 'DESC', 'substep_id' => 'ASC']);
+
         $this->set(compact('standarsList', 'standarsSteps'));
         $this->set('_serialize', ['standarsList', 'standarsSteps']);
     }

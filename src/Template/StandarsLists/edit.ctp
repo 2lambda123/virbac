@@ -23,19 +23,11 @@
                                     <label for="Name" class="required">Nombre de la Lista</label>
                                     <input type="text" id="Name" name="listname" class="form-control input-sm" value="<?php echo $standarsList->name; ?>" >
                                 </div>
-                                <div class="form-group">
-                                    <label for="Description" class="required">Descripción</label>
-                                    <input type="text" id="Description" name="listDescripción" class="form-control input-sm" value="<?php echo $standarsList->description; ?>" >
-                                </div>
-                                <div class="form-group">
-                                    <label for="Presentation" class="required">Presentación</label>
-                                    <input type="text" id="Presentation" maxlength="128" name="listPresentación" class="form-control input-sm" value="<?php echo $standarsList->presentation; ?>" >
-                                </div>
                                 <div class="row">
                                     <div class="col-md-8">
                                         <div class="form-group">
                                             <label for="StepName" class="required">Nuevo Paso</label>
-                                            <input type="text" id="StepName" maxlength="128" name="stepname" class="form-control input-sm">
+                                            <input type="text" id="StepName" maxlength="128" name="stepname" class="form-control input-sm" >
                                         </div>
                                     </div>
                                     <div class="col-md-4" style="margin-top: 22px">
@@ -49,22 +41,30 @@
                                     <div class="col-md-offset-4 col-md-4"> 
                                         <table class="table table-hover text-center">
                                             <thead>
-                                                <th>Nombre</th>
-                                                <th>Borrar</th>
+                                                <th>Paso</th>
+                                                <th>Subpaso</th>
+                                                <th></th>
+                                                <th></th>
                                             </thead>
                                             <tbody id="step-body">
-                                                <?php $i = 0; ?>
                                                 <?php foreach ($standarsSteps as $value): ?>
-                                                    <tr id="<?php echo $i; ?>">
-                                                        <td><?php echo $value['name'];?></td>
+                                                    <tr>
+                                                        <td><?php echo $value['id'] == $value['substep_id'] ? $value['name'] : '';?></td>
+                                                        <td><?php echo $value['id'] != $value['substep_id'] ? $value['name'] : '';?></td>
                                                         <td>
-                                                            <button type="button" class="delete-step" onclick="deleteSteps(this)" title="Eliminar" value="<?php echo $i; ?>">
-                                                                <i class="fa fa-fw fa-trash-o"></i>
+                                                            <button type="button" class="add-substep" onclick="addSubstep(this)" title="Agregar Subpaso" >
+                                                                <i class="fa fa-fw fa-plus"></i>
                                                             </button>
                                                         </td>
-                                                        <input type="hidden" name="standars-steps[name]" value="<?php echo $value['name'];?>">
+                                                        <td>
+                                                            <button type="button" class="delete-step" onclick="deleteSteps(this)" title="Eliminar" >
+                                                                <i class="fa fa-fw fa-trash-o"></i> 
+                                                            </button>
+                                                        </td>
+                                                        <input type="hidden" name="data[<?php echo $value['id'];?>][id]" value="<?php echo $value['id'];?>">
+                                                        <input type="hidden" name="data[<?php echo $value['id'];?>][substep_id]" value="<?php echo $value['id'];?>">
+                                                        <input type="hidden" name="data[<?php echo $value['id'];?>][name]" value="<?php echo $value['name'];?>">
                                                     </tr>
-                                                    <?php $i++; ?>
                                                 <?php endforeach ?>
                                             </tbody>
                                         </table>
@@ -85,23 +85,57 @@
     </section>
 </aside>
 <script type="text/javascript">
+    var addButton = '<button type="button" class="add-substep" onclick="addSubstep(this)" title="Agregar Subpaso" >\
+                        <i class="fa fa-fw fa-plus"></i>\
+                    </button>';
+    var deleteButton = '<button type="button" class="delete-step" onclick="deleteSteps(this)" title="Eliminar" >\
+                            <i class="fa fa-fw fa-trash-o"></i> \
+                        </button>';
+    
     $('#add-step').on('click', function(){
-        var rowCount = $('#step-body tr').length;
-            rowId = Math.random().toString().replace('0.', '');
-        var deleteButton = '<button type="button" class="delete-step" onclick="deleteSteps(this)" title="Eliminar" value="' + rowId + '">\
-                                <i class="fa fa-fw fa-trash-o"></i>\
-                            </button>';
-        var newStep = '<tr id="' + rowId + '">\
-                        <td>' + $('#StepName').val() + '</td>\
+        var stepName = $('#StepName').val();
+        var rowId = Math.floor(Math.random() * 2147483647) + 1;
+
+        if (stepName.trim() == ''){
+            return;
+        }
+        var newStep = '<tr>\
+                        <td>' + stepName + '</td>\
+                        <td></td>\
+                        <td>' + addButton + '</td>\
                         <td>' + deleteButton + '</td>\
-                        <input type="hidden" name="standars-steps[]" value="' + $('#StepName').val() + '">\
+                        <input type="hidden" name="data[' + rowId + '][id]" value="' + rowId + '">\
+                        <input type="hidden" name="data[' + rowId + '][substep_id]" value="' + rowId + '">\
+                        <input type="hidden" name="data[' + rowId + '][name]" value="' + stepName + '">\
                       </tr>';
         $('#step-body').append(newStep);
+        $('#StepName').val(' ');
     });   
 
+    function addSubstep(self){
+        var subStep = prompt("Ingresa el Subpaso:");
+        var rowId = Math.floor(Math.random() * 2147483647) + 1;
+
+        if (subStep.trim() == ''){
+            return;
+        }
+
+        var newSubStep = '<tr>\
+                <td></td>\
+                <td>' + subStep + '</td>\
+                <td></td>\
+                <td>' + deleteButton + '</td>\
+                <input type="hidden" name="data[' + rowId + '][id]" value="' + rowId + '">\
+                <input type="hidden" name="data[' + rowId + '][substep_id]" value="' + $(self).parent().next().next().val() + '">\
+                <input type="hidden" name="data[' + rowId + '][name]" value="' + subStep + '">\
+              </tr>';
+        var trFather = $(self).parent().parent();
+        $(trFather).after(newSubStep);
+
+    }
+
     function deleteSteps(self){
-        var rowId = $(self).val();
-        $('#' + rowId).remove();
+        $(self).parent().parent().remove();
     }
 </script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>      

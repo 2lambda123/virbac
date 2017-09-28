@@ -33,10 +33,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="Description" class="required">Descripción</label>
-                                    <input type="text" id="Description" maxlength="128" name="description" class="form-control input-sm" disabled >
-                                </div><div class="form-group">
+                                    <input type="text" id="Description" maxlength="128" name="description" class="form-control input-sm" readonly >
+                                </div>
+                                <div class="form-group">
                                     <label for="Presentation" class="required">Presentación</label>
-                                    <input type="text" id="Presentation" maxlength="128" name="presentation" class="form-control input-sm" disabled>
+                                    <input type="text" id="Presentation" maxlength="128" name="presentation" class="form-control input-sm" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="JobNumber">Número de orden</label>

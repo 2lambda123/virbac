@@ -43,7 +43,7 @@ class StandarsListsController extends AppController
         $standarsSteps = $this->StandarsSteps->find()
                                             ->select(['id', 'name', 'substep_id'])
                                             ->where(['standar_list_id' => $id])
-                                            ->order(['id' => 'DESC', 'substep_id' => 'ASC']);
+                                            ->order(['substep_id' => 'ASC']);
 
         $this->set(compact('standarsList', 'standarsSteps'));
         $this->set('_serialize', ['standarsList', 'standarsSteps']);
@@ -107,8 +107,9 @@ class StandarsListsController extends AppController
         $standarsSteps = $this->StandarsSteps->find()
                                             ->select(['id', 'name', 'substep_id'])
                                             ->where(['standar_list_id' => $id])
-                                            ->order(['id' => 'DESC', 'substep_id' => 'ASC']);
+                                            ->order(['substep_id' => 'ASC']);
 
+        $this->log($standarsSteps);
         $this->set(compact('standarsList', 'standarsSteps'));
         $this->set('_serialize', ['standarsList', 'standarsSteps']);
     }

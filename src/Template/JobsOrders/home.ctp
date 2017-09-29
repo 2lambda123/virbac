@@ -33,7 +33,7 @@
     <br/>
     <div id="jobs-rows">
       <?php foreach ($jobsOrders as $jobsOrder): ?>
-        <a href="view/<?php echo $jobsOrder->id;?>"><div id="pricing" class="">
+        <a href="<?php echo $this->request->webroot; ?> . 'jobs-orders/checklist/' . <?php echo $jobsOrder->id;?>"><div id="pricing" class="">
           <div class="slideanim">
             <div class="col-md-4 col-xs-12">
               <div class="panel panel-default text-center">
@@ -57,6 +57,8 @@
   </section>
 </aside>
 <script type="text/javascript">
+  var baseUrl = '<?php echo $this->request->webroot; ?>';
+
   $('#datePicker').datepicker({
     format: 'dd-mm-yyyy'
   })
@@ -89,7 +91,7 @@
     var htmlJob = "";
 
     for (var i = 0; i < json.length; i++){
-      htmlJob += '<a href="view/' + json[i]['id']+ '"><div id="pricing" class=""> \
+      htmlJob += '<a href="' + baseUrl + 'jobs-orders/checklist/' + json[i]['id']+ '"><div id="pricing" class=""> \
           <div class="slideanim"> \
             <div class="col-md-4 col-xs-12"> \
               <div class="panel panel-default text-center"> \

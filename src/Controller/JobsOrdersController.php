@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use App\Model\Product;
+use Cake\Datasource\ConnectionManager;
 
 /**
  * JobsOrders Controller
@@ -156,4 +157,21 @@ class JobsOrdersController extends AppController
         }
        
     }
+
+      public function checklist($id = null)
+    {
+
+        $conn = ConnectionManager::get('default');
+        $stmt = $conn->execute("SELECT steps.id, steps.name, steps.substep_id, jobs_orders.sku,steps.status, steps.list_id,steps.id_step, jobs_orders.description,
+                                  jobs_orders.creation_date,jobs_orders.presentation, jobs_orders.pieces 
+                                  FROM jobs_orders 
+                                  INNER JOIN steps ON jobs_orders.standar_list_id = steps.list_id 
+                                  WHERE jobs_orders.id = 32 
+                                  order by steps.substep_id");
+        $jobsOrder = $stmt->fetchAll('assoc');
+        $this->log($jobsOrder);
+        $this->set('jobsOrder', $jobsOrder);
+        $this->set('_serialize', ['jobsOrder']);
+    }
+
 }

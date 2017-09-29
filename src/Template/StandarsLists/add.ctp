@@ -66,6 +66,8 @@
     </section>
 </aside>
 <script type="text/javascript">
+    /* Random number limit 2147483647 */
+    var rowId = Math.floor(Math.random() * 2147483407) + 1;
     var addButton = '<button type="button" class="add-substep" onclick="addSubstep(this)" title="Agregar Subpaso" >\
                         <i class="fa fa-fw fa-plus"></i>\
                     </button>';
@@ -75,12 +77,12 @@
     
     $('#add-step').on('click', function(){
         var stepName = $('#StepName').val();
-        var rowId = Math.floor(Math.random() * 2147483647) + 1;
+        rowId = rowId + 1;
 
         if (stepName.trim() == ''){
             return;
         }
-        var newStep = '<tr>\
+        var newStep = '<tr class="' + rowId + '">\
                         <td>' + stepName + '</td>\
                         <td></td>\
                         <td>' + addButton + '</td>\
@@ -95,13 +97,13 @@
 
     function addSubstep(self){
         var subStep = prompt("Ingresa el Subpaso:");
-        var rowId = Math.floor(Math.random() * 2147483647) + 1;
+        rowId = rowId + 1;
 
         if (subStep.trim() == ''){
             return;
         }
 
-        var newSubStep = '<tr>\
+        var newSubStep = '<tr class="' + $(self).parent().next().next().val() + '">\
                 <td></td>\
                 <td>' + subStep + '</td>\
                 <td></td>\
@@ -116,7 +118,8 @@
     }
 
     function deleteSteps(self){
-        $(self).parent().parent().remove();
+        var id = $(self).parent().parent().attr('class');
+        $('.' + id).remove();
     }
 </script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>      

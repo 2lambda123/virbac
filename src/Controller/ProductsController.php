@@ -54,11 +54,11 @@ class ProductsController extends AppController
         if ($this->request->is('post')) {
             $product = $this->Products->patchEntity($product, $this->request->getData());
             if ($this->Products->save($product)) {
-                $this->Flash->success(__('The product has been saved.'));
+                $this->Flash->success(__('El producto ha sido guadado.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The product could not be saved. Please, try again.'));
+            $this->Flash->error(__('El producto no se pudo guardar. Por favor, intenta de nuevo.'));
         }
         $this->set(compact('product'));
         $this->set('_serialize', ['product']);
@@ -79,11 +79,11 @@ class ProductsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $product = $this->Products->patchEntity($product, $this->request->getData());
             if ($this->Products->save($product)) {
-                $this->Flash->success(__('The product has been saved.'));
+                $this->Flash->success(__('El producto ha sido guadado.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The product could not be saved. Please, try again.'));
+            $this->Flash->error(__('El producto no se pudo guardar. Por favor, intenta de nuevo.'));
         }
         $this->set(compact('product'));
         $this->set('_serialize', ['product']);

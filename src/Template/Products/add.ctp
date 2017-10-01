@@ -3,18 +3,13 @@
         <h1>
             <?php echo __('Productos'); ?>
         </h1>
-        <ol class="breadcrumb">
-            <li><i class="fa fa-home"></i> <?php echo __('Inicio'); ?></li>
-            <li><i class="fa fa-users"></i><?php echo __('Orden de Trabajo'); ?></li>
-            <li class="active"><?php echo __('Agregar'); ?></li>
-        </ol>
     </section>
     <section class="content">
         <div class="row">
             <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">                
                 <div class="box box-warning">
                     <div class="box-header">
-                        <h3 class="box-title"><?php echo __('Agregar nuevo producto'); ?></h3>
+                        <h3 class="box-title"><?php echo __('Agregar Producto'); ?></h3>
                     </div>                    
                     <?= $this->Form->create($product) ?>
                         <div class="box-body">

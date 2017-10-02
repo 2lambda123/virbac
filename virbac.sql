@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         5.7.18-log - MySQL Community Server (GPL)
--- SO del servidor:              Win64
--- HeidiSQL Versión:             9.4.0.5125
+-- Versión del servidor:         10.1.16-MariaDB - mariadb.org binary distribution
+-- SO del servidor:              Win32
+-- HeidiSQL Versión:             9.3.0.5114
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -19,18 +19,18 @@ USE `virbac`;
 -- Volcando estructura para tabla virbac.jobs_orders
 CREATE TABLE IF NOT EXISTS `jobs_orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `standar_list_id` int(11) NOT NULL,
-  `sku` varchar(50) NOT NULL,
-  `description` varchar(200) NOT NULL,
-  `presentation` varchar(200) NOT NULL,
-  `job_number` varchar(50) NOT NULL,
-  `pieces` int(11) NOT NULL,
-  `comment` varchar(200) NOT NULL,
-  `creation_date` date NOT NULL,
+  `standar_list_id` int(11) DEFAULT NULL,
+  `sku` varchar(50) DEFAULT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  `presentation` varchar(200) DEFAULT NULL,
+  `job_number` varchar(50) DEFAULT NULL,
+  `pieces` int(11) DEFAULT NULL,
+  `comment` varchar(200) DEFAULT NULL,
+  `creation_date` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_id_standar_list` (`standar_list_id`),
   CONSTRAINT `fk_id_standar_list` FOREIGN KEY (`standar_list_id`) REFERENCES `standars_lists` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
 
 -- La exportación de datos fue deseleccionada.
 -- Volcando estructura para tabla virbac.products
@@ -46,62 +46,72 @@ CREATE TABLE IF NOT EXISTS `products` (
 CREATE TABLE IF NOT EXISTS `standars_lists` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
-  `description` varchar(200) NOT NULL,
-  `presentation` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=latin1;
 
 -- La exportación de datos fue deseleccionada.
 -- Volcando estructura para tabla virbac.standars_steps
 CREATE TABLE IF NOT EXISTS `standars_steps` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `standar_list_id` int(11) NOT NULL,
+  `substep_id` int(11) DEFAULT NULL,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_id_standar_list_2` (`standar_list_id`),
   CONSTRAINT `fk_id_standar_list_2` FOREIGN KEY (`standar_list_id`) REFERENCES `standars_lists` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1650485562 DEFAULT CHARSET=latin1;
 
 -- La exportación de datos fue deseleccionada.
 -- Volcando estructura para tabla virbac.steps
 CREATE TABLE IF NOT EXISTS `steps` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `list_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `status` enum('miss','completed','reassigned') NOT NULL,
-  `comment` varchar(200) NOT NULL,
+  `jobs_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `step_id` int(11) DEFAULT NULL,
+  `substep_id` int(11) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `status` enum('missing','completed','reassigned') DEFAULT 'missing',
+  `comment` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_id_user` (`user_id`),
-  KEY `fk_id_list` (`list_id`),
-  CONSTRAINT `fk_id_list` FOREIGN KEY (`list_id`) REFERENCES `jobs_orders` (`standar_list_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_id_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- La exportación de datos fue deseleccionada.
--- Volcando estructura para tabla virbac.substeps
-CREATE TABLE IF NOT EXISTS `substeps` (
-  `id` int(11) NOT NULL,
-  `step_id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `status` enum('miss','completed','reassigned') NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_id_step` (`step_id`),
-  CONSTRAINT `fk_id_step` FOREIGN KEY (`step_id`) REFERENCES `steps` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `fk_jobs_id` (`jobs_id`),
+  CONSTRAINT `fk_id_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_jobs_id` FOREIGN KEY (`jobs_id`) REFERENCES `jobs_orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 
 -- La exportación de datos fue deseleccionada.
 -- Volcando estructura para tabla virbac.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `paternal_last_name` varchar(50) NOT NULL,
   `maternal_last_name` varchar(50) NOT NULL,
-  `ocupation` enum('Operador','Supervisor') NOT NULL,
+  `access_level` enum('operador','supervisor') NOT NULL,
   `password` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- Volcando datos para la tabla virbac.users: ~2 rows (aproximadamente)
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`id`, `email`, `name`, `paternal_last_name`, `maternal_last_name`, `access_level`, `password`) VALUES
+	(2, 'admin', 'Admin', 'Admin', 'Admin', 'supervisor', '09f836894fc1fe9af6f429fc24dcccc2e6847fe0');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 -- La exportación de datos fue deseleccionada.
+-- Volcando estructura para disparador virbac.add_steps
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `add_steps` AFTER INSERT ON `jobs_orders` FOR EACH ROW BEGIN
+	INSERT INTO steps (SELECT null, new.id, null, standars_steps.id, standars_steps.substep_id, standars_steps.name, 'missing', null
+	 											FROM jobs_orders 
+													INNER JOIN standars_lists ON jobs_orders.standar_list_id = standars_lists.id 
+													INNER JOIN standars_steps ON standars_lists.id = standars_steps.standar_list_id 
+														WHERE jobs_orders.id = new.id);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

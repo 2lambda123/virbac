@@ -116,7 +116,7 @@ class UsersController extends AppController
             $user = $this->Users->find()->where([
                 'email' => $this->request->getData('email'),
                 'password' => sha1($this->request->getData('password')),
-                'access_level' => 'operador',
+                'access_level' => 'supervisor',
             ])->toArray();
 
             if (empty($user)) {

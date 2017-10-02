@@ -16,6 +16,7 @@
             <thead>
                 <tr>
                 <th><?= $this->Paginator->sort('id') ?></th>
+                <th><?= $this->Paginator->sort('email', 'Correo') ?></th>
                 <th><?= $this->Paginator->sort('name', 'Nombre') ?></th>
                 <th><?= $this->Paginator->sort('paternal_last_name', 'Apellido Paterno') ?></th>
                 <th><?= $this->Paginator->sort('maternal_last_name', 'Apellido Materno') ?></th>

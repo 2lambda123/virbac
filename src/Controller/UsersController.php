@@ -53,6 +53,7 @@ class UsersController extends AppController
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+            $user['password'] = sha1($user['password']);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
@@ -78,6 +79,7 @@ class UsersController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+            $user['password'] = sha1($user['password']);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
@@ -113,7 +115,8 @@ class UsersController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->find()->where([
                 'email' => $this->request->getData('email'),
-                'password' => sha1($this->request->getData('password'))
+                'password' => sha1($this->request->getData('password')),
+                'access_level' => 'operador',
             ])->toArray();
 
             if (empty($user)) {

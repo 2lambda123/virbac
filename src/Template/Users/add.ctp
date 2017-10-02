@@ -15,7 +15,7 @@
                         <div class="box-body">
                             <fieldset>
                                 <div class="form-group">
-                                    <label for="email" class="required">Email</label>
+                                    <label for="email" class="required">Correo</label>
                                     <input type="text" id="email" name="email" class="form-control input-sm">
                                 </div>                                
                                 <div class="form-group">

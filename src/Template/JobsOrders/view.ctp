@@ -38,7 +38,10 @@
                             </div>
                              <div class="form-group">
                                 <label for="creation_date">Fecha de fabricación</label>
-                                <input type="date" disabled value="<?php echo $jobsOrder['creation_date']; ?>"" id="Creation_date" maxlength="128" name="creation_date" class="form-control input-sm">
+                                <div class="input-group input-append date" id="datePicker">
+                                    <input type="text" class="form-control" name="creation_date" id="Date" value="<?php echo date('d-m-Y'); ?>" disabled />
+                                    <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                </div>
                             </div>                                
                             <div class="form-group">
                                 <label for="Commentary">Comentario</label>

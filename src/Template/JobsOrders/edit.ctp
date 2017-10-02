@@ -42,7 +42,7 @@
                                     <input type="text" value="<?php echo $jobsOrder['pieces']; ?>"" id="Pieces" maxlength="128" name="pieces" class="form-control input-sm">
                                 </div>                              
                                 <div class="form-group">
-                                    <label for="Date">Fecha:</label>
+                                    <label for="Date">Fecha de creación</label>
                                     <div class="input-group input-append date" id="datePicker">
                                         <input type="text" class="form-control" name="creation_date" id="Date" value="<?php echo date('d-m-Y'); ?>" />
                                         <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>

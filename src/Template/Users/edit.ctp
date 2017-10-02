@@ -15,8 +15,8 @@
                         <div class="box-body">
                             <fieldset>
                                 <div class="form-group">
-                                    <label for="email" class="required">Email</label>
-                                    <input type="text" id="email" name="email" class="form-control input-sm" value="value="<?php echo $user->email; ?>"">
+                                    <label for="email" class="required">Correo</label>
+                                    <input type="text" id="email" name="email" class="form-control input-sm" value="<?php echo $user->email; ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="name" class="required">Nombre(s)</label>

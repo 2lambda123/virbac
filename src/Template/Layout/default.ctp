@@ -26,8 +26,8 @@
         <?= $this->fetch('css') ?>
         <?= $this->fetch('script') ?>
     </head>
-    <body class="skin-blue">
-        <aside class="left-side sidebar-offcanvas" style="margin-top: -80px;">
+    <body class="skin-blue" style="background-color: #f9f9f9">
+        <aside class="left-side sidebar-offcanvas" style="margin-top: -80px; position: fixed">
             <section class="sidebar">
                 <ul class="sidebar-menu">
                     <li class="active">
@@ -54,6 +54,11 @@
                         <li>
                             <a href="<?php echo $this->request->webroot . 'users';?>">
                                 <i class="fa fa-user"></i> <span><?php echo __('Usuarios'); ?></span>
+                            </a>
+                        </li>                        
+                        <li>
+                            <a href="<?php echo $this->request->webroot . 'users/logout';?>" onClick="return confirm('¿Está seguro que quiere cerrar sesión?')">
+                                <i class="fa fa-power-off"></i> <span><?php echo __('Cerrar Sesión'); ?></span>
                             </a>
                         </li>
                     <?php endif; ?>

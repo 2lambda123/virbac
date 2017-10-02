@@ -3,15 +3,11 @@
         <h1>
             <?php echo __('Lista'); ?>
         </h1>
-        <ol class="breadcrumb">
-            <li><a><i class="fa fa-home"></i> <?php echo __('Inicio'); ?></a></li>
-            <li class="active"><?php echo __('Lista'); ?></li>
-        </ol>
     </section>
+    <?php $this->Flash->render(); ?>
     <section class="content">
-        <?php $this->Flash->render(); ?>
         <div class="actions-ribbon">
-            <a class="btn btn-app" href="standars-lists/add">
+            <a class="btn btn-app" href="standars-lists/add" style="font-size: medium;">
                 <i class="fa fa-plus"></i>
                 <?php echo __('Agregar Lista'); ?>
             </a>

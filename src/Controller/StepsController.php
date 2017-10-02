@@ -84,9 +84,9 @@ class StepsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $step = $this->Steps->patchEntity($step, $this->request->getData());
             if ($this->Steps->save($step)) {
-                $this->Flash->success(__('The step has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                $this->response->header(['Content-type: application/json']);
+                $this->response->body('{ "success": true }');
+                return $this->response;
             }
             $this->Flash->error(__('The step could not be saved. Please, try again.'));
         }

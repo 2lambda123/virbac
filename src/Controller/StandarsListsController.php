@@ -109,7 +109,6 @@ class StandarsListsController extends AppController
                                             ->where(['standar_list_id' => $id])
                                             ->order(['substep_id' => 'ASC']);
 
-        $this->log($standarsSteps);
         $this->set(compact('standarsList', 'standarsSteps'));
         $this->set('_serialize', ['standarsList', 'standarsSteps']);
     }

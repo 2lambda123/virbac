@@ -3,14 +3,8 @@
       <h1>
         <?php echo __('Bienvenido'); ?>
       </h1>
-      <ol class="breadcrumb">
-        <li><a><i class="fa fa-home"></i> <?php echo __('Inicio'); ?></a></li>
-        <li class="active"><?php echo __('Ordenes de Trabajo'); ?></li>
-      </ol>
   </section>
-
   <section class="content">
-    <?php $this->Flash->render(); ?>
     <div class="row">
       <div class="text-center">
         <h2>
@@ -33,7 +27,7 @@
     <br/>
     <div id="jobs-rows">
       <?php foreach ($jobsOrders as $jobsOrder): ?>
-        <a href="<?php echo $this->request->webroot; ?> . 'jobs-orders/checklist/' . <?php echo $jobsOrder->id;?>"><div id="pricing" class="">
+        <a href="<?php echo $this->request->webroot; ?>jobs-orders/checklist/<?php echo $jobsOrder->id;?>"><div id="pricing" class="">
           <div class="slideanim">
             <div class="col-md-4 col-xs-12">
               <div class="panel panel-default text-center">

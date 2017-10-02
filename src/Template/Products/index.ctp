@@ -4,7 +4,7 @@
             <?php echo __('Productos'); ?>
         </h1>
     </section>
-        <?php echo $this->Flash->render(); ?>
+    <?php echo $this->Flash->render(); ?>
     <section class="content">
         <div class="actions-ribbon">
             <a class="btn btn-app" href="products/add" style="font-size: medium;">

@@ -3,11 +3,6 @@
         <h1>
             <?php echo __('Usuarios'); ?>
         </h1>
-        <ol class="breadcrumb">
-            <li><i class="fa fa-home"></i> <?php echo __('Inicio'); ?></li>
-            <li><i class="fa fa-users"></i><?php echo __('Usuarios'); ?></li>
-            <li class="active"><?php echo __('Agregar'); ?></li>
-        </ol>
     </section>
     <section class="content">
         <div class="row">
@@ -19,6 +14,10 @@
                     <?= $this->Form->create($user) ?>
                         <div class="box-body">
                             <fieldset>
+                                <div class="form-group">
+                                    <label for="email" class="required">Email</label>
+                                    <input type="text" id="email" name="email" class="form-control input-sm" value="value="<?php echo $user->email; ?>"">
+                                </div>
                                 <div class="form-group">
                                     <label for="name" class="required">Nombre(s)</label>
                                     <input type="number" id="name" name="name" class="form-control input-sm" value="<?php echo $user->id; ?>" >

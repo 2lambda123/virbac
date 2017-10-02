@@ -3,11 +3,6 @@
         <h1>
             <?php echo __('Orden de Trabajo'); ?>
         </h1>
-        <ol class="breadcrumb">
-            <li><i class="fa fa-home"></i> <?php echo __('Inicio'); ?></li>
-            <li><i class="fa fa-users"></i><?php echo __('Orden de Trabajo'); ?></li>
-            <li class="active"><?php echo __('Agregar'); ?></li>
-        </ol>
     </section>
     <section class="content">
         <div class="row">
@@ -21,7 +16,7 @@
                             <fieldset>
                                 <div class="form-group">
                                     <label for="StandarList" class="required">Lista Estándar</label>
-                                    <select id="StandarList" name="standar_list_id" class="form-control input-sm">                                         
+                                    <select id="StandarList" name="standar_list_id" class="form-control input-sm">                       
                                         <?php foreach ($standarsLists as $key => $value): ?>
                                             <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
                                         <?php endforeach ?>                                

@@ -108,4 +108,26 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function admin(){
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $user = $this->Users->find()->where([
+                'email' => $this->request->getData('email'),
+                'password' => sha1($this->request->getData('password'))
+            ])->toArray();
+
+            if (empty($user)) {
+                $this->Flash->error(__('Contraseña o Usuario incorrectos.'));
+                return $this->redirect(['action' => 'admin']);
+            } else {
+                $this->request->session()->write('Auth.type', 'admin');
+                return $this->redirect(['controller' => 'JobsOrders', 'action' => 'home']);
+            }
+        }
+    }
+
+    public function logout(){
+        $this->request->session()->delete('Auth.type');
+        return $this->redirect(['controller' => 'JobsOrders', 'action' => 'home']);
+    }
 }

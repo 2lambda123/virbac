@@ -3,10 +3,6 @@
         <h1>
             <?php echo __('Usuarios'); ?>
         </h1>
-        <ol class="breadcrumb">
-            <li><a><i class="fa fa-home"></i> <?php echo __('Inicio'); ?></a></li>
-            <li class="active"><?php echo __('Usuarios'); ?></li>
-        </ol>
     </section>
     <section class="content">
         <?php $this->Flash->render(); ?>
@@ -19,18 +15,19 @@
         <table class="table table-condensed table-hover">
             <thead>
                 <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('name', 'Nombre') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('paternal_last_name', 'Apellido Paterno') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('maternal_last_name', 'Apellido Materno') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('access_level', 'Nivel de accesso') ?></th>
-                <th scope="col" class="actions"><?= __('Acciones') ?></th>
+                <th><?= $this->Paginator->sort('id') ?></th>
+                <th><?= $this->Paginator->sort('name', 'Nombre') ?></th>
+                <th><?= $this->Paginator->sort('paternal_last_name', 'Apellido Paterno') ?></th>
+                <th><?= $this->Paginator->sort('maternal_last_name', 'Apellido Materno') ?></th>
+                <th><?= $this->Paginator->sort('access_level', 'Nivel de accesso') ?></th>
+                <th class="actions"><?= __('Acciones') ?></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($user as $users): ?>
                 <tr>
                     <td><?= $this->Number->format($users->id) ?></td>
+                    <td><?= h($users->email) ?></td>
                     <td><?= h($users->name) ?></td>
                     <td><?= h($users->paternal_last_name) ?></td>
                     <td><?= h($users->maternal_last_name) ?></td>

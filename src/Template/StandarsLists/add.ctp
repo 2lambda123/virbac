@@ -3,11 +3,6 @@
         <h1>
             <?php echo __('Lista'); ?>
         </h1>
-        <ol class="breadcrumb">
-            <li><i class="fa fa-home"></i> <?php echo __('Inicio'); ?></li>
-            <li><i class="fa fa-users"></i><?php echo __('Lista'); ?></li>
-            <li class="active"><?php echo __('Agregar'); ?></li>
-        </ol>
     </section>
     <section class="content">
         <div class="row">

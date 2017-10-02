@@ -3,13 +3,9 @@
         <h1>
             <?php echo __('Ordenes de Trabajo'); ?>
         </h1>
-        <ol class="breadcrumb">
-            <li><a><i class="fa fa-home"></i> <?php echo __('Inicio'); ?></a></li>
-            <li class="active"><?php echo __('Ordenes de Trabajo'); ?></li>
-        </ol>
     </section>
+    <?php $this->Flash->render(); ?>
     <section class="content">
-        <?php $this->Flash->render(); ?>
         <div class="actions-ribbon">
             <a class="btn btn-app" href="jobs-orders/add" style="font-size: medium;">
                 <i class="fa fa-plus"></i>

@@ -3,11 +3,6 @@
         <h1>
             <?php echo __('Orden de Trabajo'); ?>
         </h1>
-        <ol class="breadcrumb">
-            <li><i class="fa fa-home"></i> <?php echo __('Inicio'); ?></li>
-            <li><i class="fa fa-users"></i><?php echo __('Orden de Trabajo'); ?></li>
-            <li class="active"><?php echo __('Ver'); ?></li>
-        </ol>
     </section>
     <section class="content">
         <div class="row">

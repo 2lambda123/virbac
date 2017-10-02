@@ -1,6 +1,10 @@
 $(function(){
 	$('form').validate({
 		rules: {
+			email: {
+				required: true,
+				maxlength: 100
+			},
 			name: {
 				required: true,
 				maxlength: 100
@@ -23,6 +27,10 @@ $(function(){
 			}
 		},
 		messages: {
+			email: {
+				required: 'Este campo es requerido',
+				maxlength: 'Por favor no ingreses mas de 100 caracteres'
+			},
 			name: {
 				required: 'Este campo es requerido',
 				maxlength: 'Por favor no ingreses mas de 100 caracteres'

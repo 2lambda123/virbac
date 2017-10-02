@@ -11,7 +11,9 @@
             <?= $this->fetch('title') ?>
         </title>
         <?= $this->Html->meta('icon') ?>
-        <?= $this->Html->css('font-awesome.min') ?>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pretty-checkbox/2.2.1/pretty.min.css">
+
         <?= $this->Html->css('main.css') ?>
         <?= $this->Html->css('bootstrap.min.css') ?>
         <?= $this->Html->css('datepicker.min.css') ?>
@@ -33,26 +35,28 @@
                             <i class="fa fa-bar-chart"></i> <span>Historial</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="<?php echo $this->request->webroot . 'jobs-orders';?>">
-                            <i class="fa fa-briefcase"></i> <span><?php echo __('Ordenes de Trabajo'); ?></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->request->webroot . 'standars-lists';?>">
-                            <i class="fa fa-file-text"></i> <span><?php echo __('Listas'); ?></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->request->webroot . 'products';?>">
-                            <i class="fa fa fa-flask"></i> <span><?php echo __('Productos'); ?></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->request->webroot . 'users';?>">
-                            <i class="fa fa-user"></i> <span><?php echo __('Usuarios'); ?></span>
-                        </a>
-                    </li>
+                    <?php if ($this->request->session()->read('Auth.type') == 'admin'): ?>
+                        <li>
+                            <a href="<?php echo $this->request->webroot . 'jobs-orders';?>">
+                                <i class="fa fa-briefcase"></i> <span><?php echo __('Ordenes de Trabajo'); ?></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo $this->request->webroot . 'standars-lists';?>">
+                                <i class="fa fa-file-text"></i> <span><?php echo __('Listas'); ?></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo $this->request->webroot . 'products';?>">
+                                <i class="fa fa fa-flask"></i> <span><?php echo __('Productos'); ?></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo $this->request->webroot . 'users';?>">
+                                <i class="fa fa-user"></i> <span><?php echo __('Usuarios'); ?></span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </section>
         </aside>

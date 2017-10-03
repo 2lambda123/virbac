@@ -4,6 +4,10 @@
             <?php echo __('Orden de Trabajo'); ?>
         </h1>
     </section>
+    <?php
+        $date = new DateTime(date($jobsOrder['creation_date']));
+        $formatedDate = $date->format("d-m-Y");
+    ?>
     <section class="content">
         <div class="row">
             <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">                
@@ -39,13 +43,13 @@
                              <div class="form-group">
                                 <label for="creation_date">Fecha de fabricación</label>
                                 <div class="input-group input-append date" id="datePicker">
-                                    <input type="text" class="form-control" name="creation_date" id="Date" value="<?php echo date('d-m-Y'); ?>" disabled />
+                                    <input type="text" class="form-control" name="creation_date" id="Date" value="<?php echo $formatedDate; ?>" disabled />
                                     <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                 </div>
                             </div>                                
                             <div class="form-group">
                                 <label for="Commentary">Comentario</label>
-                                <input type="text" disabled value="<?php echo $jobsOrder['comment']; ?>"" id="C omment" maxlength="128" name="comment" class="form-control input-sm">
+                                <input type="text" disabled value="<?php echo $jobsOrder['comment']; ?>"" id="Comment" maxlength="128" name="comment" class="form-control input-sm">
                             </div>
                         </fieldset>
                     </div> 

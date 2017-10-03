@@ -54,5 +54,4 @@
         </div>
     </section>
 </aside>
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>      
 <?= $this->Html->script('validation_users.js') ?>

@@ -11,14 +11,13 @@
             <?= $this->fetch('title') ?>
         </title>
         <?= $this->Html->meta('icon') ?>
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pretty-checkbox/2.2.1/pretty.min.css">
-
         <?= $this->Html->css('main.css') ?>
+        <?= $this->Html->css('font-awesome.min.css') ?>
         <?= $this->Html->css('bootstrap.min.css') ?>
         <?= $this->Html->css('datepicker.min.css') ?>
 
         <?= $this->Html->script('jquery-3.2.1.min.js') ?>
+        <?= $this->Html->script('jquery-validate.min.js') ?>
         <?= $this->Html->script('bootstrap.min.js') ?>
         <?= $this->Html->script('datepicker.min.js') ?>
 

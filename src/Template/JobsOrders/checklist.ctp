@@ -90,7 +90,7 @@
       </div>
     </div>
 </div>
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>      
+<?= $this->Html->css('pretty.min.css') ?>
 <?= $this->Html->script('validation_checklist.js') ?>
 <script type="text/javascript">
     var baseUrl = '<?php echo $this->request->webroot; ?>';

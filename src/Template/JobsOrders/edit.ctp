@@ -4,6 +4,10 @@
             <?php echo __('Orden de Trabajo'); ?>
         </h1>
     </section>
+    <?php
+        $date = new DateTime(date($jobsOrder['creation_date']));
+        $formatedDate = $date->format("d-m-Y");
+    ?>
     <section class="content">
         <div class="row">
             <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">                
@@ -44,7 +48,7 @@
                                 <div class="form-group">
                                     <label for="Date">Fecha de creación</label>
                                     <div class="input-group input-append date" id="datePicker">
-                                        <input type="text" class="form-control" name="creation_date" id="Date" value="<?php echo date('d-m-Y'); ?>" />
+                                        <input type="text" class="form-control" name="creation_date" id="Date" value="<?php echo $formatedDate; ?>" />
                                         <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
                                 </div>
@@ -65,9 +69,7 @@
         </div>
     </section>
 </aside>
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>      
 <?= $this->Html->script('validation_jobs.js') ?>
-
 <script type="text/javascript">
 
     $('#datePicker').datepicker({

@@ -79,6 +79,7 @@
         </div>
     </section>
 </aside>
+<?= $this->Html->script('validation_list.js') ?>
 <script type="text/javascript">
     /* Random number limit 2147483647 */
     var rowId = Math.floor(Math.random() * 2147483407) + 1;
@@ -136,5 +137,3 @@
         $('.' + id).remove();
     }
 </script>
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>      
-<?= $this->Html->script('validation_list.js') ?>

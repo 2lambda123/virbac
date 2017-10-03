@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use App\Model\Product;
+use App\Model\Step;
 use Cake\Datasource\ConnectionManager;
 
 /**
@@ -58,6 +59,7 @@ class JobsOrdersController extends AppController
         $jobsOrder = $this->JobsOrders->newEntity();
         if ($this->request->is('post')) {
             $jobsOrder = $this->JobsOrders->patchEntity($jobsOrder, $this->request->getData());
+            $jobsOrder['creation_date'] =  new \DateTime($jobsOrder['creation_date']);
             if ($this->JobsOrders->save($jobsOrder)) {
                 $this->Flash->success(__('The jobs order has been saved.'));
 
@@ -84,6 +86,7 @@ class JobsOrdersController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $jobsOrder = $this->JobsOrders->patchEntity($jobsOrder, $this->request->getData());
+            $jobsOrder['creation_date'] =  new \DateTime($jobsOrder['creation_date']);
             if ($this->JobsOrders->save($jobsOrder)) {
                 $this->Flash->success(__('The jobs order has been saved.'));
 
@@ -121,23 +124,35 @@ class JobsOrdersController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])){
             $this->autoRender = false;
             $date =  new \DateTime(date($this->request->getData('date')));
-            $jobsOrders = $this->JobsOrders->find()->where([
-                'WEEK(creation_date)' => $date->format('W')
-                ])->toArray();
+            $dateWeek = $date->format('W');
 
+            $conn = ConnectionManager::get('default');
+            $stmt = $conn->execute("SELECT jobs.id, count(jobs.id) AS 'stepsNumber', sum(case when steps.status = 'missing' then 1 else 0 end) as missing,
+                                  jobs.sku, jobs.description, jobs.presentation, jobs.job_number, jobs.pieces, jobs.creation_date
+                                  FROM jobs_orders AS jobs
+                                  INNER JOIN steps ON jobs.id = steps.jobs_id
+                                  WHERE WEEK(jobs.creation_date) = $dateWeek
+                                  GROUP by jobs.id
+                                  order by steps.substep_id ASC");
+
+            $jobsOrders = $stmt->fetchAll('assoc');
             $this->response->header(['Content-type: application/json']);
             $this->response->body(json_encode($jobsOrders));
             return $this->response;
         }
         $date =  new \DateTime(date("Y-m-d"));
-        $query = $this->JobsOrders->find()->where([
-            'WEEK(creation_date)' => $date->format('W')
-            ]);        
+        $dateWeek = $date->format('W');
 
-        $this->paginate = [
-            'contain' => ['StandarsLists']
-        ];
-        $jobsOrders = $this->paginate($query);
+        $conn = ConnectionManager::get('default');
+        $stmt = $conn->execute("SELECT jobs.id, count(jobs.id) AS 'stepsNumber', sum(case when steps.status = 'missing' then 1 else 0 end) as missing,
+                                  jobs.sku, jobs.description, jobs.presentation, jobs.job_number, jobs.pieces, jobs.creation_date
+                                  FROM jobs_orders AS jobs
+                                  INNER JOIN steps ON jobs.id = steps.jobs_id
+                                  WHERE WEEK(jobs.creation_date) = $dateWeek
+                                  GROUP by jobs.id
+                                  order by steps.substep_id ASC");
+
+        $jobsOrders = $stmt->fetchAll('assoc');
         $this->set(compact('jobsOrders'));
         $this->set('_serialize', ['jobsOrders']);
     }

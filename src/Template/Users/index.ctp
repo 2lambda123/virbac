@@ -4,8 +4,8 @@
             <?php echo __('Usuarios'); ?>
         </h1>
     </section>
+    <?php $this->Flash->render(); ?>
     <section class="content">
-        <?php $this->Flash->render(); ?>
         <div class="actions-ribbon">
             <a class="btn btn-app" href="users/add" style="font-size: medium;">
                 <i class="fa fa-plus"></i>

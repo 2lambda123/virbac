@@ -29,6 +29,7 @@
             </thead>
             <tbody>
                 <?php foreach ($jobsOrders as $jobsOrder): ?>
+                    <?php $date = new DateTime($jobsOrder['creation_date']) ?>
                     <tr>
                         <td><?= $this->Number->format($jobsOrder->id) ?></td>
                         <td><?= $jobsOrder->has('standars_list') ? $this->Html->link($jobsOrder->standars_list->name, ['controller' => 'StandarsLists', 'action' => 'view', $jobsOrder->standars_list->id]) : '' ?></td>
@@ -37,7 +38,7 @@
                         <td><?= h($jobsOrder->presentation) ?></td>
                         <td><?= h($jobsOrder->job_number) ?></td>
                         <td><?= $this->Number->format($jobsOrder->pieces) ?></td>
-                        <td><?= h($jobsOrder->creation_date) ?></td>
+                        <td><?= h($date->format('d-m-Y')) ?></td>
                         <td><?= h($jobsOrder->comment) ?></td>
                         <td class="actions">
                             <a href="jobs-orders/view/<?php echo  $jobsOrder->id; ?>" class="action-btn" title="Ver">

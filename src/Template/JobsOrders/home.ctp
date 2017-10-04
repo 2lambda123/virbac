@@ -27,29 +27,29 @@
     <br/>
     <div id="jobs-rows">
       <?php foreach ($jobsOrders as $jobsOrder): ?>
-        <?php $percentCompleted =   1 - ($jobsOrder['missing'] / $jobsOrder['stepsNumber']); ?>
-        <a href="<?php echo $this->request->webroot; ?>jobs-orders/checklist/<?php echo $jobsOrder->id;?>"><div id="pricing" class="">
+        <?php $percentCompleted =   (1 - ($jobsOrder['missing'] / $jobsOrder['stepsNumber'])) * 100; ?>
+        <a href="<?php echo $this->request->webroot; ?>jobs-orders/checklist/<?php echo $jobsOrder['id'];?>">
           <div class="slideanim">
             <div class="col-md-4 col-xs-12">
               <div class="panel panel-default text-center" style="border-radius: 5px">
                 <div class="panel-heading">
-                  <h4><?php echo $jobsOrder->description?></h4>
+                  <h4><?php echo $jobsOrder['description']; ?></h4>
                 </div>
                 <div class="panel-body">
                   <div class="col-md-6" style="text-align: left">
-                    <label>SKU</label> <p><?php echo $jobsOrder->sku; ?></p>
-                    <label>Presentación</label><p><?php echo $jobsOrder->presentation; ?></p>
-                    <label>Número de piezas</label><p><?php echo $jobsOrder->pieces; ?></p>
+                    <label>SKU</label> <p><?php echo $jobsOrder['sku']; ?></p>
+                    <label>Presentación</label><p><?php echo $jobsOrder['presentation']; ?></p>
+                    <label>Número de piezas</label><p><?php echo $jobsOrder['pieces']; ?></p>
                   </div>
                   <div class="col-md-6">
-                    <div class="progress blue">
+                    <div class="progress blue" percent="<?php echo $percentCompleted;?>">
                         <span class="progress-left">
                             <span class="progress-bar"></span>
                         </span>
                         <span class="progress-right">
                             <span class="progress-bar"></span>
                         </span>
-                        <div class="progress-value"><?php echo $percentCompleted * 100;?>%</div>
+                        <div class="progress-value"><?php echo $percentCompleted ;?>%</div>
                     </div>
                   </div>
                 </div>
@@ -61,6 +61,138 @@
     </div>
   </section>
 </aside>
+
+<script type="text/javascript">
+  var baseUrl = '<?php echo $this->request->webroot; ?>';
+  $(function(){
+    progressCircle();
+  });
+
+  function progressCircle(){
+    $('.progress').each(function(element){
+      var percentCompleted = parseInt($( this ).attr('percent'));
+      var animationLeft, animationRight;
+
+      switch(percentCompleted){
+        case 0:
+          animationLeft = 'loading-0 1.5s linear forwards 1.8s';
+          animationRight = 'loading-0 1.5s linear forwards 1.8s';
+          break;
+        case 10:
+          animationLeft = 'loading-1 1.5s linear forwards 1.8s';
+          animationRight = 'loading-0 1.5s linear forwards 1.8s';        
+          break;
+        case 20:
+          animationLeft = 'loading-2 1.5s linear forwards 1.8s';
+          animationRight = 'loading-0 1.5s linear forwards 1.8s';          
+          break;
+        case 30:
+          animationLeft = 'loading-3 1.5s linear forwards 1.8s';
+          animationRight = 'loading-0 1.5s linear forwards 1.8s';
+          break;
+        case 40:
+          animationLeft = 'loading-4 1.5s linear forwards 1.8s';
+          animationRight = 'loading-0 1.5s linear forwards 1.8s';
+          break;
+        case 50:
+          animationLeft = 'loading-5 1.5s linear forwards 1.8s';
+          animationRight = 'loading-0 1.5s linear forwards 1.8s';
+          break;
+        case 60:
+          animationLeft = 'loading-5 1.5s linear forwards 1.8s';
+          animationRight = 'loading-1 1.5s linear forwards 1.8s';
+          break;
+        case 70:
+          animationLeft = 'loading-5 1.5s linear forwards 1.8s';
+          animationRight = 'loading-2 1.5s linear forwards 1.8s';          
+          break;
+        case 80:
+          animationLeft = 'loading-5 1.5s linear forwards 1.8s';
+          animationRight = 'loading-3 1.5s linear forwards 1.8s';
+          break;
+        case 90:
+          animationLeft = 'loading-5 1.5s linear forwards 1.8s';
+          animationRight = 'loading-4 1.5s linear forwards 1.8s';
+          break;
+        case 100:
+          animationLeft = 'loading-5 1.5s linear forwards 1.8s';
+          animationRight = 'loading-5 1.5s linear forwards 1.8s';
+          break;   
+      }
+      $(this).children().eq(0).children().eq(0).css('animation', animationRight);
+      $(this).children().eq(1).children().eq(0).css('animation', animationLeft);
+    });
+  }
+
+  $('#datePicker').datepicker({
+    format: 'dd-mm-yyyy'
+  })
+  .on('hide', function(e) {
+    var date = $("#dateValue").val();
+    filterByDate(date);
+  });
+
+  function filterByDate(date){
+    $.ajax({
+      url: 'jobs-orders/home',
+      data: { date: date },
+      type: 'post',
+        success: function (result) {
+          if(!result.error){
+            console.log(result);
+            refreshingJobs(result)
+          }
+        },
+        error: function (result) {
+          alert('Ha ocurrido un error, por favor intenta de nuevo.')
+        }
+    });
+  }
+
+  function refreshingJobs(result) {
+    var json = result;
+    var htmlJob = "";
+
+    for (var i = 0; i < json.length; i++){
+      var percentCompleted =   (1 - (json[i]['missing'] / json[i]['stepsNumber'])) * 100;
+
+      htmlJob += '<a href="' + baseUrl + 'jobs-orders/checklist/' + json[i]['id']+ '">\
+          <div class="slideanim"> \
+            <div class="col-md-4 col-xs-12"> \
+              <div class="panel panel-default text-center"> \
+                <div class="panel-heading"> \
+                  <h4>' + json[i]['description'] + '</h4> \
+                </div> \
+                <div class="panel-body">\
+                  <div class="col-md-6" style="text-align: left">\
+                    <label>SKU</label><p>' + json[i]['sku'] + '</p> \
+                    <label>Presentación</label><p>' + json[i]['presentation'] + '</p> \
+                    <label>Número de piezas</label><p>' + json[i]['pieces'] + '</p> \
+                  </div> \
+                  <div class="col-md-6">\
+                    <div class="progress blue" percent="' + percentCompleted + '">\
+                      <span class="progress-left">\
+                        <span class="progress-bar"></span>\
+                      </span>\
+                      <span class="progress-right">\
+                        <span class="progress-bar"></span>\
+                      </span>\
+                      <div class="progress-value">' + percentCompleted + '%</div>\
+                    </div>\
+                  </div>\
+                </div> \
+              </div> \
+            </div> \
+          </div>\
+        </a>'
+        console.log(htmlJob);
+    }
+
+    $('#jobs-rows').empty();
+    $('#jobs-rows').append(htmlJob);
+    progressCircle();
+  }
+</script>
 <style type="text/css">
     .progress{
         width: 150px;
@@ -137,10 +269,10 @@
         border-right: 0;
         -webkit-transform-origin: center right;
         transform-origin: center right;
-        animation: loading-5 1.8s linear forwards;
+        /*animation: loading-5 1.8s linear forwards;*/
     }
     .progress.blue .progress-left .progress-bar{
-        animation: loading-4 1.5s linear forwards 1.8s;
+        /*animation: loading-2 1.5s linear forwards 1.8s;*/
     }
 
     @keyframes loading-5{
@@ -197,115 +329,3 @@
         .progress{ margin-bottom: 20px; }
     }
 </style>
-
-<script type="text/javascript">
-  var baseUrl = '<?php echo $this->request->webroot; ?>';
-  /*
-  $(function(){
-    var animationleft, animationRight;
-    switch (true) {
-      case 0:
-        animationleft = 'loading-0 1.5s linear forwards 1.8s';
-        animationRight = 'loading-0 1.5s linear forwards 1.8s';
-        default;
-      case 10:
-        animationleft = 'loading-1 1.5s linear forwards 1.8s';
-        animationRight = 'loading-0 1.5s linear forwards 1.8s';
-        default;      
-      case 20:
-        animationleft = 'loading-2 1.5s linear forwards 1.8s';
-        animationRight = 'loading-0 1.5s linear forwards 1.8s';
-        default;
-      case 30:
-        animationleft = 'loading-3 1.5s linear forwards 1.8s';
-        animationRight = 'loading-0 1.5s linear forwards 1.8s';
-        default;
-      case 40:
-        animationleft = 'loading-4 1.5s linear forwards 1.8s';
-        animationRight = 'loading-0 1.5s linear forwards 1.8s';
-        default;
-      case 50:
-        animationleft = 'loading-5 1.5s linear forwards 1.8s';
-        animationRight = 'loading-0 1.5s linear forwards 1.8s';
-        default;
-      case 60:
-        animationleft = 'loading-5 1.5s linear forwards 1.8s';
-        animationRight = 'loading-1 1.5s linear forwards 1.8s';
-        default;
-      case 70:
-        animationleft = 'loading-5 1.5s linear forwards 1.8s';
-        animationRight = 'loading-2 1.5s linear forwards 1.8s';
-        default;
-      case 80:
-        animationleft = 'loading-5 1.5s linear forwards 1.8s';
-        animationRight = 'loading-3 1.5s linear forwards 1.8s';
-        default;
-      case 90:
-        animationleft = 'loading-5 1.5s linear forwards 1.8s';
-        animationRight = 'loading-4 1.5s linear forwards 1.8s';
-        default;
-      case 100:
-        animationleft = 'loading-5 1.5s linear forwards 1.8s';
-        animationRight = 'loading-5 1.5s linear forwards 1.8s';
-        default;
-    }
-  });
-*/
-  $('#datePicker').datepicker({
-    format: 'dd-mm-yyyy'
-  })
-  .on('hide', function(e) {
-    var date = $("#dateValue").val();
-    console.log(date)
-    filterByDate(date);
-  });
-
-  function filterByDate(date){
-    $.ajax({
-      url: 'jobs-orders/home',
-      data: { date: date },
-      type: 'post',
-        success: function (result) {
-          if(!result.error){
-            console.log(result);
-            refreshingJobs(result)
-          }
-        },
-        error: function (result) {
-          console.log(result);
-          alert('Ha ocurrido un error, por favor intenta de nuevo.')
-        }
-    });
-  }
-
-  function refreshingJobs(result) {
-    var json = result;
-    var htmlJob = "";
-
-    for (var i = 0; i < json.length; i++){
-      htmlJob += '<a href="' + baseUrl + 'jobs-orders/checklist/' + json[i]['id']+ '"><div id="pricing" class=""> \
-          <div class="slideanim"> \
-            <div class="col-md-4 col-xs-12"> \
-              <div class="panel panel-default text-center"> \
-                <div class="panel-heading"> \
-                  <h4>' + json[i]['description'] + '</h4> \
-                </div> \
-                <div class="panel-body"> \
-                  <p><strong>SKU: </strong>' + json[i]['sku'] + '</p> \
-                  <p><strong>Presentación: </strong>' + json[i]['presentation'] + '</p> \
-                  <p><strong>Número de piezas: </strong>' + json[i]['pieces'] + '</p> \
-                </div> \
-                <div class="panel-footer"> \
-                </div> \
-              </div> \
-            </div> \
-          </div> \
-        </a>'
-    }
-
-    $('#jobs-rows').empty();
-    $('#jobs-rows').append(htmlJob);
-  }
-</script>
-
-

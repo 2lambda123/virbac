@@ -80,6 +80,7 @@ class StepsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $step = $this->Steps->newEntities($this->request->getData());            
             if ($this->Steps->saveMany($step)) {
+                $this->Flash->success(__('The step has been saved.'));
                 return $this->redirect("/jobs-orders/checklist/$id");
             }
             $this->Flash->error(__('The step could not be saved. Please, try again.'));

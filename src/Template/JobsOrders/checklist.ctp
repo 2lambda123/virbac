@@ -34,6 +34,15 @@
                                     <label for="Pieces">Cantidad</label>
                                     <input type="number" id="Pieces" maxlength="128" name="pieces" class="form-control input-sm" value="<?php echo $jobsOrder[0]['pieces'];?>" disabled >
                                 </div>
+                                <div class="form-group">
+                                    <label>Usuario que realizó las tareas</label>
+                                    <select id="user" class="form-control input-sm" name="user">
+                                        <option></option>                       
+                                        <?php foreach ($users as $user): ?>
+                                            <option value="<?php echo $user['id']; ?>"><?php echo $user['name'] . ' ' . $user['paternal_last_name'] . ' ' . $user['maternal_last_name']; ?></option>
+                                        <?php endforeach ?>                                
+                                    </select>
+                                </div>
                                 <div class="row text-center">
                                     <div class="col-md-3">
                                         <label>Pasos</label>
@@ -77,7 +86,7 @@
                                 <?php endforeach; ?> 
                                 <div class="box-footer">
                                     <div class="text-right">
-                                        <input type="button" value="Aceptar" class="btn btn-info" data-toggle="modal" data-target="#usersModal">
+                                        <input type="submit" value="Aceptar" class="btn btn-info">
                                     </div>
                                 </div>
                             </fieldset>
@@ -88,31 +97,6 @@
         </div>
     </section>
 </aside>
-<div class="modal fade" id="usersModal" role="dialog" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Persona que realizó los pasos</h4>
-        </div>
-        <div class="modal-body">
-            <form id="modalInfo">
-                <div class="form-group">
-                    <label>Usuarios</label>
-                    <select id="user" class="form-control input-sm" name="user">
-                        <option value=""></option>                       
-                        <?php foreach ($users as $user): ?>
-                            <option value="<?php echo $user['id']; ?>"><?php echo $user['name'] . ' ' . $user['paternal_last_name'] . ' ' . $user['maternal_last_name']; ?></option>
-                        <?php endforeach ?>                                
-                    </select>
-                </div>
-            </form>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" id="save">Guardar</button>
-        </div>
-      </div>
-    </div>
-</div>
 <?= $this->Html->css('pretty.min.css') ?>
 <?= $this->Html->script('validation_checklist.js') ?>
 <script type="text/javascript">
@@ -129,15 +113,7 @@
         }
     });
 
-    $('#usersModal').on('shown.bs.modal', function (e) {
-        $('#user').val('');
-        $('#modalInfo').validate().resetForm();     
-    });
-
-    $('#save').on('click', function(){
-        if ($('#modalInfo').valid()) {
-            $('.users').val($('#user').val());
-            $('#formSteps').submit();
-        }
+    $('#formSteps').submit(function(){
+        $('.users').val($('#user').val());
     });
 </script>

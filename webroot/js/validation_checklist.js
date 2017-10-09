@@ -1,5 +1,5 @@
 $(function(){
-	$('#modalInfo').validate({
+	$('form').validate({
 		rules: {
 			user: {
 				required: true
@@ -9,7 +9,7 @@ $(function(){
 		messages: {
 			user: {
 				required: 'Este campo es requerido'
-			},
+			}
 		} 
 	});
 });

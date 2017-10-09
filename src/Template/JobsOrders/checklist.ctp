@@ -6,7 +6,7 @@
     </section>
     <section class="content">
         <div class="row">
-            <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">                
+            <div class="col-md-10 col-sm-10 col-md-offset-1 col-sm-offset-1">                
                 <div class="box box-warning">
                     <div class="box-header">
                         <h3 class="box-title"><?php echo __('Orden de Trabajo'); ?></h3>
@@ -34,6 +34,14 @@
                                     <label for="Pieces">Cantidad</label>
                                     <input type="number" id="Pieces" maxlength="128" name="pieces" class="form-control input-sm" value="<?php echo $jobsOrder[0]['pieces'];?>" disabled >
                                 </div>
+                                <?php 
+                                    $users_print = []; 
+                                    foreach ($users as $user) {
+                                        $users_print[$user['id']]['name'] = $user['name'];
+                                        $users_print[$user['id']]['paternal_last_name'] = $user['paternal_last_name'];
+                                    }
+                                    $this->log($users_print);
+                                ?>
                                 <div class="form-group">
                                     <label>Usuario que realizó las tareas</label>
                                     <select id="user" class="form-control input-sm" name="user">
@@ -43,15 +51,19 @@
                                         <?php endforeach ?>                                
                                     </select>
                                 </div>
+                                <br/>
                                 <div class="row text-center">
                                     <div class="col-md-3">
                                         <label>Pasos</label>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <label>Completado</label>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <label>Reasignado</label>
+                                    </div>                                              
+                                    <div class="col-md-2">
+                                        <label>Usuario</label>
                                     </div>                                
                                     <div class="col-md-3">
                                         <label>Comentario</label>
@@ -65,17 +77,20 @@
                                                 <label><?php echo $steps['name']; ?></label>
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-2">
                                             <div class="pretty circle primary">
                                                 <input class="steps" type="radio" name="<?php echo $steps['id']; ?>[status]" value="completed" <?php echo $steps['status'] == 'completed' ? 'checked': '';?> <?php echo $steps['status'] != 'missing' ? 'disabled': '';?> >
                                                 <label><i class="fa fa-check"></i></label>
                                             </div>                                    
                                         </div>                                
-                                        <div class="col-md-3">
+                                        <div class="col-md-2">
                                             <div class="pretty circle warning">
                                                 <input class="steps" type="radio" name="<?php echo $steps['id']; ?>[status]" value="reassigned" <?php echo $steps['status'] == 'reassigned' ? 'checked': '';?> <?php echo $steps['status'] != 'missing' ? 'disabled': '';?> >
                                                 <label><i class="fa fa-check"></i></label>
                                             </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <p><?php echo empty($users_print[$steps['user_id']]['name']) ? '' : $users_print[$steps['user_id']]['name'] . ' ' . $users_print[$steps['user_id']]['paternal_last_name'] ;?></p>
                                         </div>
                                         <div class="col-md-3">
                                             <textarea class="form-control" rows="2" id="comment" name="<?php echo $steps['id']; ?>[comment]"  value="<?php echo $steps['comment'];?>" disabled><?php echo $steps['comment'];?></textarea>

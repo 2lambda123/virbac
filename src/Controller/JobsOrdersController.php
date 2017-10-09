@@ -178,7 +178,7 @@ class JobsOrdersController extends AppController
         $conn = ConnectionManager::get('default');
         $stmt = $conn->execute("SELECT
                                   jobs.sku, jobs.description, jobs.presentation, jobs.job_number, jobs.pieces, jobs.creation_date,
-                                  steps.id, steps.step_id, steps.substep_id, steps.name, steps.status, steps.comment
+                                  steps.id, steps.step_id, steps.substep_id, steps.name, steps.status, steps.comment, steps.user_id
                                   FROM jobs_orders AS jobs
                                   INNER JOIN steps ON jobs.id = steps.jobs_id
                                   WHERE jobs.id = $id
@@ -187,7 +187,6 @@ class JobsOrdersController extends AppController
 
         $this->loadModel('Users');
         $users = $this->Users->find()->toArray();
-
         $this->set(compact('jobsOrder', 'users', 'id'));
         $this->set('_serialize', ['jobsOrder', 'users', 'id']);
     }

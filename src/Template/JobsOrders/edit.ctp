@@ -103,7 +103,6 @@
               $("#Presentation").val(result[0]['presentation']);
             },
             error: function (result) {
-              console.log(result);
               alert('Ha ocurrido un error, por favor intenta de nuevo.')
             }
         });

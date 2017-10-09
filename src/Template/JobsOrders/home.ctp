@@ -27,7 +27,7 @@
     <br/>
     <div id="jobs-rows">
       <?php foreach ($jobsOrders as $jobsOrder): ?>
-        <?php $percentCompleted =   (1 - ($jobsOrder['missing'] / $jobsOrder['stepsNumber'])) * 100; ?>
+        <?php $percentCompleted =   floor((1 - ($jobsOrder['missing'] / $jobsOrder['stepsNumber'])) * 100); ?>
         <a href="<?php echo $this->request->webroot; ?>jobs-orders/checklist/<?php echo $jobsOrder['id'];?>">
           <div class="slideanim">
             <div class="col-md-4 col-xs-12">
@@ -139,7 +139,6 @@
       type: 'post',
         success: function (result) {
           if(!result.error){
-            console.log(result);
             refreshingJobs(result)
           }
         },
@@ -154,7 +153,7 @@
     var htmlJob = "";
 
     for (var i = 0; i < json.length; i++){
-      var percentCompleted =   (1 - (json[i]['missing'] / json[i]['stepsNumber'])) * 100;
+      var percentCompleted =   Math.floor((1 - (json[i]['missing'] / json[i]['stepsNumber'])) * 100);
 
       htmlJob += '<a href="' + baseUrl + 'jobs-orders/checklist/' + json[i]['id']+ '">\
           <div class="slideanim"> \
@@ -185,7 +184,6 @@
             </div> \
           </div>\
         </a>'
-        console.log(htmlJob);
     }
 
     $('#jobs-rows').empty();

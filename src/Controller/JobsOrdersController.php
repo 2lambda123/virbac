@@ -188,8 +188,8 @@ class JobsOrdersController extends AppController
         $this->loadModel('Users');
         $users = $this->Users->find()->toArray();
 
-        $this->set(compact('jobsOrder', 'users'));
-        $this->set('_serialize', ['jobsOrder', 'users']);
+        $this->set(compact('jobsOrder', 'users', 'id'));
+        $this->set('_serialize', ['jobsOrder', 'users', 'id']);
     }
 
 }

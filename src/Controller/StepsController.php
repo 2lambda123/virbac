@@ -58,7 +58,6 @@ class StepsController extends AppController
             $step = $this->Steps->patchEntity($step, $this->request->getData());
             if ($this->Steps->save($step)) {
                 $this->Flash->success(__('The step has been saved.'));
-
                 return $this->redirect(['controller' => 'standars-list', 'action' => 'index']);
             }
             $this->Flash->error(__('The step could not be saved. Please, try again.'));
@@ -78,17 +77,13 @@ class StepsController extends AppController
      */
     public function edit($id = null)
     {
-        $step = $this->Steps->get($id, [
-            'contain' => []
-        ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $step = $this->Steps->patchEntity($step, $this->request->getData());
-            if ($this->Steps->save($step)) {
-                $this->response->header(['Content-type: application/json']);
-                $this->response->body('{ "success": true }');
-                return $this->response;
+            $step = $this->Steps->newEntities($this->request->getData());            
+            if ($this->Steps->saveMany($step)) {
+                return $this->redirect("/jobs-orders/checklist/$id");
             }
             $this->Flash->error(__('The step could not be saved. Please, try again.'));
+            return $this->redirect("/jobs-orders/checklist/$id");
         }
         $jobsOrders = $this->Steps->JobsOrders->find('list', ['limit' => 200]);
         $users = $this->Steps->Users->find('list', ['limit' => 200]);

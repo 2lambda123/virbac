@@ -79,13 +79,13 @@
                                         </div>
                                         <div class="form-group col-md-2">
                                             <div class="pretty circle primary">
-                                                <input class="steps" type="radio" name="<?php echo $steps['id']; ?>[status]" value="completed" <?php echo $steps['status'] == 'completed' ? 'checked': '';?> <?php echo $steps['status'] != 'missing' ? 'disabled': '';?> >
+                                                <input class="steps" type="radio" name="<?php echo $steps['id']; ?>[status]" value="completed" <?php echo $steps['status'] == 'completed' ? 'checked': '';?> <?php echo $steps['status'] != 'missing' ? 'disabled': '';?>  checkstate="false" >
                                                 <label><i class="fa fa-check"></i></label>
                                             </div>                                    
                                         </div>                                
                                         <div class="col-md-2">
                                             <div class="pretty circle warning">
-                                                <input class="steps" type="radio" name="<?php echo $steps['id']; ?>[status]" value="reassigned" <?php echo $steps['status'] == 'reassigned' ? 'checked': '';?> <?php echo $steps['status'] != 'missing' ? 'disabled': '';?> >
+                                                <input class="steps" type="radio" name="<?php echo $steps['id']; ?>[status]" value="reassigned" <?php echo $steps['status'] == 'reassigned' ? 'checked': '';?> <?php echo $steps['status'] != 'missing' ? 'disabled': '';?> checkstate="false" >
                                                 <label><i class="fa fa-check"></i></label>
                                             </div>
                                         </div>
@@ -104,6 +104,7 @@
                                         <input type="submit" value="Aceptar" class="btn btn-info">
                                     </div>
                                 </div>
+                                <input type="hidden" id="flag" />
                             </fieldset>
                         </div>
                     </form>
@@ -115,18 +116,35 @@
 <?= $this->Html->css('pretty.min.css') ?>
 <?= $this->Html->script('validation_checklist.js') ?>
 <script type="text/javascript">
-    $(".steps").on('change', function(event){
+
+
+    $(".steps").on('click', function(event){
         var reference;
 
         if ($(this).val() == 'reassigned') {
-            reference = $(this).parent().parent().next().children().eq(0);
-            reference.attr('disabled', false);
+            if ($(this).attr('checkstate') == 'false') {
+                reference = $(this).parent().parent().next().next().children().eq(0);
+                reference.attr('disabled', false);
+                $(this).attr('checkstate', 'true');
+            } else {
+                reference = $(this).parent().parent().next().next().children().eq(0);
+                $(this).prop('checked', false);
+                $(this).attr('checkstate', 'false');
+                reference.attr('disabled', true);
+            }
         } else {
-            reference = $(this).parent().parent().next().next().children().eq(0);
-            reference.attr('disabled', true);
-            reference.val('');
+            if ($(this).attr('checkstate') == 'false') {
+                reference = $(this).parent().parent().next().next().next().children().eq(0);
+                reference.attr('disabled', true);
+                reference.val('');
+                $(this).attr('checkstate', 'true');
+            } else {
+                $(this).prop('checked', false);
+                $(this).attr('checkstate', 'false');
+            }
         }
     });
+
 
     $('#formSteps').submit(function(){
         $('.users').val($('#user').val());

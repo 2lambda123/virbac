@@ -27,7 +27,7 @@
                                 <div class="col-md-4" style="margin-top: 22px">
                                     <input type="button" id="add-step" value="Nuevo Paso" class="btn btn-success">
                                 </div>                                
-                            </div>                                
+                            </div>                                 
                             <br/>
                         </fieldset>
                         <fieldset>
@@ -35,6 +35,7 @@
                                 <div class="col-md-offset-4 col-md-4"> 
                                     <table class="table table-hover text-center">
                                         <thead>
+                                            <th>Cantidad</th>
                                             <th>Paso</th>
                                             <th>Subpaso</th>
                                             <th></th>
@@ -43,6 +44,7 @@
                                         <tbody id="step-body">
                                             <?php foreach ($standarsSteps as $value): ?>
                                                 <tr>
+                                                    <td><?php echo $value['quantity'];?></td>
                                                     <td><?php echo $value['id'] == $value['substep_id'] ? $value['name'] : '';?></td>
                                                     <td><?php echo $value['id'] != $value['substep_id'] ? $value['name'] : '';?></td>
                                                     <td>

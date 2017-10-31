@@ -41,7 +41,7 @@ class StandarsListsController extends AppController
         ]);
         $this->loadModel('StandarsSteps');
         $standarsSteps = $this->StandarsSteps->find()
-                                            ->select(['id', 'name', 'substep_id'])
+                                            ->select(['id', 'name', 'substep_id', 'quantity'])
                                             ->where(['standar_list_id' => $id])
                                             ->order(['substep_id' => 'ASC']);
 
@@ -105,7 +105,7 @@ class StandarsListsController extends AppController
 
         $this->loadModel('StandarsSteps');
         $standarsSteps = $this->StandarsSteps->find()
-                                            ->select(['id', 'name', 'substep_id'])
+                                            ->select(['id', 'name', 'substep_id', 'quantity'])
                                             ->where(['standar_list_id' => $id])
                                             ->order(['substep_id' => 'ASC']);
 

@@ -37,9 +37,15 @@
                 </div>
                 <div class="panel-body">
                   <div class="col-md-6" style="text-align: left">
-                    <label>SKU</label> <p><?php echo $jobsOrder['sku']; ?></p>
-                    <label>Presentación</label><p><?php echo $jobsOrder['presentation']; ?></p>
-                    <label>Número de piezas</label><p><?php echo $jobsOrder['pieces']; ?></p>
+                    <label>Orden:</label><span> <?php echo $jobsOrder['job_number']; ?></span>
+                    <br/>
+                    <label>Fecha a envasar:</label><span> <?php echo $jobsOrder['creation_date']; ?></span>
+                    <br/>
+                    <label>Sku:</label><span> <?php echo $jobsOrder['sku']; ?></span>
+                    <br/>
+                    <label>Presentación:</label><span> <?php echo $jobsOrder['presentation']; ?></span>
+                    <br/>
+                    <label>No. de piezas:</label><span> <?php echo $jobsOrder['pieces']; ?></span>
                   </div>
                   <div class="col-md-6">
                     <div class="progress blue" percent="<?php echo $percentCompleted;?>">
@@ -164,9 +170,15 @@
                 </div> \
                 <div class="panel-body">\
                   <div class="col-md-6" style="text-align: left">\
-                    <label>SKU</label><p>' + json[i]['sku'] + '</p> \
-                    <label>Presentación</label><p>' + json[i]['presentation'] + '</p> \
-                    <label>Número de piezas</label><p>' + json[i]['pieces'] + '</p> \
+                    <label>Orden:</label><span>' + json[i]['job_number'] + '</span>\
+                    <br/>\
+                    <label>Fecha a envasar:</label><span>' + json[i]['creation_date'] + '</span>\
+                    <br/>\
+                    <label>Sku:</label><span>' + json[i]['sku'] + '</span>\
+                    <br/>\
+                    <label>Presentación:</label><span>' + json[i]['presentation'] + '</span>\
+                    <br/>\
+                    <label>No. de piezas:</label><span>' + json[i]['pieces'] + '</span>\
                   </div> \
                   <div class="col-md-6">\
                     <div class="progress blue" percent="' + percentCompleted + '">\

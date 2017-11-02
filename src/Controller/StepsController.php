@@ -78,7 +78,7 @@ class StepsController extends AppController
     public function edit($id = null)
     {
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $step = $this->Steps->newEntities($this->request->getData());            
+            $step = $this->Steps->newEntities($this->request->getData());
             if ($this->Steps->saveMany($step)) {
                 $this->Flash->success(__('The step has been saved.'));
                 return $this->redirect("/jobs-orders/checklist/$id");

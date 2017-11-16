@@ -90,13 +90,13 @@
                                     </div>                                
                                     <div class="form-group col-md-1">
                                         <div class="pretty circle primary">
-                                            <input class="steps" type="radio" name="<?php echo $steps['id']; ?>[status]" value="completed" <?php echo $steps['status'] == 'completed' ? 'checked': '';?> <?php echo $steps['status'] != 'missing' ? 'disabled': '';?>  checkstate="false" >
+                                            <input class="steps" type="radio" name="<?php echo $steps['id']; ?>[status]" value="completed" <?php echo $steps['status'] == 'completed' ? 'checked checkstate="true"': 'checkstate="false"';?> <?php echo ($steps['status'] == 'missing' ||  $isAdmin) ? '' : 'disabled';?>  >
                                             <label><i class="fa fa-check"></i></label>
                                         </div>                                    
                                     </div>
                                     <div class="col-md-1">
                                         <div class="pretty circle warning">
-                                            <input class="steps" type="radio" name="<?php echo $steps['id']; ?>[status]" value="reassigned" <?php echo $steps['status'] == 'reassigned' ? 'checked': '';?> <?php echo ($steps['status'] != 'missing'  ||  !$isAdmin) ? 'disabled': '';?> checkstate="false" >
+                                            <input class="steps" type="radio" name="<?php echo $steps['id']; ?>[status]" value="reassigned" <?php echo $steps['status'] == 'reassigned' ? 'checked checkstate="true"': 'checkstate="false"';?> <?php echo $isAdmin ? '' : 'disabled';?> >
                                             <label><i class="fa fa-check"></i></label>
                                         </div>
                                     </div>
@@ -104,7 +104,7 @@
                                         <p><?php echo empty($users_print[$steps['user_id']]['name']) ? '' : $users_print[$steps['user_id']]['name'] . ' ' . $users_print[$steps['user_id']]['paternal_last_name'] ;?></p>
                                     </div>
                                     <div class="col-md-3">
-                                        <textarea class="form-control" rows="2" id="comment" name="<?php echo $steps['id']; ?>[comment]"  value="<?php echo $steps['comment'];?>" disabled><?php echo $steps['comment'];?></textarea>
+                                        <textarea class="form-control" rows="2" id="comment" name="<?php echo $steps['id']; ?>[comment]"  value="<?php echo $steps['comment'];?>"><?php echo $steps['comment'];?></textarea>
                                     </div>
                                     <input type="hidden" name="<?php echo $steps['id']; ?>[id]" value="<?php echo $steps['id']; ?>"  />                                   
                                     <input class="users" type="hidden" name="<?php echo $steps['id']; ?>[user_id]" <?php echo $steps['status'] != 'missing' ? 'disabled': '';?> />
@@ -132,21 +132,27 @@
         if ($(this).val() == 'reassigned') {
             if ($(this).attr('checkstate') == 'false') {
                 reference = $(this).parent().parent().next().next().children().eq(0);
-                reference.attr('disabled', false);
+                //reference.attr('disabled', false);
                 $(this).attr('checkstate', 'true');
+                $(this).prop('checked', 'true');
+                $(this).parent().parent().prev().children().eq(0).children().eq(0).attr('checkstate', 'false');
+
             } else {
                 reference = $(this).parent().parent().next().next().children().eq(0);
+                reference.val('');
+                //reference.attr('disabled', true);
                 $(this).prop('checked', false);
                 $(this).attr('checkstate', 'false');
-                reference.val('');
-                reference.attr('disabled', true);
             }
         } else {
             if ($(this).attr('checkstate') == 'false') {
                 reference = $(this).parent().parent().next().next().next().children().eq(0);
-                reference.attr('disabled', true);
                 reference.val('');
+                //reference.attr('disabled', true);
                 $(this).attr('checkstate', 'true');
+                $(this).prop('checked', 'true');
+                $(this).parent().parent().next().children().eq(0).children().eq(0).attr('checkstate', 'false');
+
             } else {
                 $(this).prop('checked', false);
                 $(this).attr('checkstate', 'false');
